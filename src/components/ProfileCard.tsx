@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Box, Typography, Avatar, Paper, Collapse } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { motion, AnimatePresence } from "framer-motion";
-import profileImage from "../assets/profile-image.jpg";
+import profileImage from "../assets/profile-images/profile-image.jpg";
 import { useTheme } from "styled-components";
 import { useLanguage } from "../contexts/LanguageContext";
 

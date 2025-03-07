@@ -19,7 +19,7 @@ export function Header() {
         display: "flex",
         justifyContent: "space-between",
         alignItems: "center",
-        padding: "1rem 2rem",
+        padding: "1rem 1rem",
         position: "fixed",
         top: 0,
         left: 0,
