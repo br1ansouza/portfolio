@@ -1,10 +1,8 @@
 import { Box } from "@mui/material";
 import { ProfileCard } from "../components/ProfileCard";
-import { Certificates } from "../components/Certificates";
 import { Technologies } from "../components/Technologies";
 import { useTheme } from "styled-components";
-import { Header } from "../components/Header";
-import { ActionButtons } from "../components/ActionButtons";
+import { Sidebar } from "../components/Sidebar";
 
 export function Home() {
   const theme = useTheme();
@@ -20,7 +18,7 @@ export function Home() {
         padding: "1rem",
       }}
     >
-      <Header />
+      <Sidebar />
 
       <Box
         sx={{
@@ -35,7 +33,6 @@ export function Home() {
         }}
       >
         <ProfileCard />
-        <ActionButtons />
       </Box>
 
       <Box
@@ -51,7 +48,6 @@ export function Home() {
       >
 
         <Technologies />
-        <Certificates />
         
       </Box>
     </Box>
