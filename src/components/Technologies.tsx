@@ -12,6 +12,8 @@ import {
   SiMariadb,
   SiGit,
   SiPostman,
+  SiDocker,
+  SiExpo
 } from "react-icons/si";
 
 const technologies = [
@@ -25,6 +27,8 @@ const technologies = [
   { icon: <SiMariadb size="2rem" />, name: "MariaDB", color: "#003545" },
   { icon: <SiGit size="2rem" />, name: "Git", color: "#F05032" },
   { icon: <SiPostman size="2rem" />, name: "Postman", color: "#ee6d3f" },
+  { icon: <SiDocker size="2rem" />, name: "Docker", color: "#2496ED" },
+  { icon: <SiExpo size="2rem" />, name: "Expo", color: "#000020" },
 ];
 
 export function Technologies() {
@@ -40,7 +44,7 @@ export function Technologies() {
       sx={{
         backgroundColor: theme.colors.cardBackground,
         padding: "1.5rem",
-        borderRadius: "22px",
+        borderRadius: "12px",
         display: "flex",
         justifyContent: "center",
         gap: "1.5rem",
@@ -52,7 +56,7 @@ export function Technologies() {
         <Tooltip key={index} title={tech.name} arrow>
           <Box
             component={motion.div}
-            whileHover={{ scale: 1.2, color: tech.color, transition: { duration: 0.3 } }}
+            whileHover={{ scale: 1.2, color: tech.color, transition: { duration: 0.1 } }}
             sx={{
               color: theme.colors.textSecondary,
               transition: "color 0.3s ease-in-out",
