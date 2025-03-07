@@ -9,3 +9,9 @@ export const theme = {
     },
   };
   
+
+  // definir cor para o white mode
+  // Azul Elétrico -> #012591
+  // Prata Metálico → #C0C0C0
+  // Cinza Escuro → #4B4B4B
+  // Branco  → #FFFFFF
