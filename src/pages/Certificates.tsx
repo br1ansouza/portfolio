@@ -5,8 +5,8 @@ import { useLanguage } from "../contexts/LanguageContext";
 import { FaAward, FaCode, FaNetworkWired, FaGitAlt, FaServer, FaDocker } from "react-icons/fa";
 
 const certificates = [
-  { 
-    name: { pt: "FrontEnd - Módulo 1 - LAB365", en: "FrontEnd - Module 1 - LAB365" }, 
+  {
+    name: { pt: "FrontEnd - Módulo 1 - LAB365", en: "FrontEnd - Module 1 - LAB365" },
     institution: "LAB365",
     date: "2024",
     icon: <FaCode size={24} />,
@@ -14,40 +14,40 @@ const certificates = [
     score: "9.73",
     link: "https://drive.google.com/file/d/1-XHxEg9cCRRAyv5e_1Io2noM_zjEIgb1/view?usp=sharing"
   },
-  { 
-    name: { pt: "Desenvolvimento Web Compacto e Completo", en: "Complete and Compact Web Development" }, 
+  {
+    name: { pt: "Desenvolvimento Web Compacto e Completo", en: "Complete and Compact Web Development" },
     institution: "Udemy",
     date: "2023",
     icon: <FaCode size={24} />,
     color: "#2196F3",
     link: "https://drive.google.com/file/d/1F7iHWIBZL1z_ESQ8g4nn_zHeedvTjOjF/view?usp=sharing"
   },
-  { 
-    name: { pt: "Fundamentos de Programação", en: "Programming Fundamentals" }, 
+  {
+    name: { pt: "Fundamentos de Programação", en: "Programming Fundamentals" },
     institution: "Udemy",
     date: "2022",
     icon: <FaServer size={24} />,
     color: "#4CAF50",
     link: "https://drive.google.com/file/d/1AUksurChYYHK9Xk61tbU8iOD1BNWe0ad/view?usp=sharing"
   },
-  { 
-    name: { pt: "Git", en: "Git" }, 
+  {
+    name: { pt: "Git", en: "Git" },
     institution: "Udemy",
     date: "2022",
     icon: <FaGitAlt size={24} />,
     color: "#FF9800",
     link: "https://drive.google.com/file/d/1Kgrh015VJbjAs9087GGBf9vQxZEhaNFT/view?usp=sharing"
   },
-  { 
-    name: { pt: "Arquitetura de Redes", en: "Network Architecture" }, 
+  {
+    name: { pt: "Arquitetura de Redes", en: "Network Architecture" },
     institution: "Udemy",
     date: "2023",
     icon: <FaNetworkWired size={24} />,
     color: "#9C27B0",
     link: "https://drive.google.com/file/d/1u-_zNT4k-cAbBc5vBg73ONCtUj-3-jxD/view?usp=sharing"
   },
-  { 
-    name: { pt: "Proxmox - Professional", en: "Proxmox - Professional" }, 
+  {
+    name: { pt: "Proxmox - Professional", en: "Proxmox - Professional" },
     institution: "Udemy",
     date: "2023",
     icon: <FaDocker size={24} />,
@@ -76,21 +76,20 @@ export function CertificatesPage() {
       }}
     >
       <Typography
-        variant="h3"
+        variant="h2"
         fontWeight="bold"
-        color={theme.colors.textPrimary}
-        textAlign="center"
         mb={4}
         sx={{
           display: "flex",
+          justifyContent: "center",
           alignItems: "center",
-          gap: "10px",
-          background: "linear-gradient(to right,rgb(108, 30, 233),rgb(243, 33, 226))",
-          WebkitBackgroundClip: "text",
-          WebkitTextFillColor: "transparent",
+          gap: "12px",
+          fontFamily: "'Poppins', sans-serif",
+          letterSpacing: "1px",
+          color: theme.colors.hover,
         }}
       >
-        <FaAward size={28} />
+        <FaAward size={32} />
         <AnimatePresence mode="wait">
           <motion.span
             key={language}
@@ -99,10 +98,11 @@ export function CertificatesPage() {
             exit={{ opacity: 0, y: 10 }}
             transition={{ duration: 0.3 }}
           >
-            {language === "pt" ? "Minha Certificações" : "My Certification Journey"}
+            {language === "pt" ? "Minhas Certificações" : "My Certification Journey"}
           </motion.span>
         </AnimatePresence>
       </Typography>
+
 
       <Grid container spacing={3} justifyContent="center">
         {certificates.map((cert, index) => (

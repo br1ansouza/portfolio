@@ -12,16 +12,10 @@ export function Contact() {
     pt: {
       title: "Entre em Contato",
       subtitle: "Quer bater um papo? Me envie uma mensagem no LinkedIn ou utilize uma das opções abaixo. 🚀",
-      email: "E-mail",
-      linkedin: "LinkedIn",
-      discord: "Discord",
     },
     en: {
       title: "Get in Touch",
       subtitle: "Want to chat? Send me a message on LinkedIn or use one of the options below. 🚀",
-      email: "Email",
-      linkedin: "LinkedIn",
-      discord: "Discord",
     },
   };
 
@@ -77,99 +71,58 @@ export function Contact() {
       </Typography>
 
       <Box sx={{ display: "flex", flexDirection: "column", gap: "1.5rem" }}>
-        <Box
-          component="a"
+        <ContactItem
           href="mailto:briandesouza1597@gmail.com"
-          target="_blank"
-          rel="noopener noreferrer"
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            gap: "12px",
-            padding: "1.3rem",
-            borderRadius: "14px",
-            backgroundColor: theme.colors.cardBackground,
-            color: theme.colors.textPrimary,
-            textDecoration: "none",
-            fontSize: "1.3rem",
-            fontWeight: "500",
-            transition: "0.3s",
-            boxShadow: "0 4px 14px rgba(0,0,0,0.1)",
-            "&:hover": {
-              backgroundColor: theme.colors.hover,
-              color: theme.colors.textPrimary,
-              transform: "scale(1.05)",
-              boxShadow: "0 8px 18px rgba(255,255,255,0.15)",
-            },
-          }}
-        >
-          <FaEnvelope size={26} />
-          {messages[language as keyof typeof messages].email}: briandesouza1597@gmail.com
-        </Box>
-
-        <Box
-          component="a"
+          icon={<FaEnvelope size={26} />}
+          text="briandesouza1597@gmail.com"
+        />
+        <ContactItem
           href="https://www.linkedin.com/in/brian-souza/"
-          target="_blank"
-          rel="noopener noreferrer"
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            gap: "12px",
-            padding: "1.3rem",
-            borderRadius: "14px",
-            backgroundColor: theme.colors.cardBackground,
-            color: theme.colors.textPrimary,
-            textDecoration: "none",
-            fontSize: "1.3rem",
-            fontWeight: "500",
-            transition: "0.3s",
-            boxShadow: "0 4px 14px rgba(0,0,0,0.1)",
-            "&:hover": {
-              backgroundColor: theme.colors.hover,
-              color: theme.colors.textPrimary,
-              transform: "scale(1.05)",
-              boxShadow: "0 8px 18px rgba(255,255,255,0.15)",
-            },
-          }}
-        >
-          <FaLinkedin size={26} />
-          {messages[language as keyof typeof messages].linkedin}: linkedin.com/in/brian-souza
-        </Box>
-
-        <Box
-          component="a"
+          icon={<FaLinkedin size={26} />}
+          text="linkedin.com/in/brian-souza"
+        />
+        <ContactItem
           href="https://discord.com/users/br1ansouza"
-          target="_blank"
-          rel="noopener noreferrer"
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            gap: "12px",
-            padding: "1.3rem",
-            borderRadius: "14px",
-            backgroundColor: theme.colors.cardBackground,
-            color: theme.colors.textPrimary,
-            textDecoration: "none",
-            fontSize: "1.3rem",
-            fontWeight: "500",
-            transition: "0.3s",
-            boxShadow: "0 4px 14px rgba(0,0,0,0.1)",
-            "&:hover": {
-              backgroundColor: theme.colors.hover,
-              color: theme.colors.textPrimary,
-              transform: "scale(1.05)",
-              boxShadow: "0 8px 18px rgba(255,255,255,0.15)",
-            },
-          }}
-        >
-          <FaDiscord size={26} />
-          {messages[language as keyof typeof messages].discord}: br1ansouza
-        </Box>
+          icon={<FaDiscord size={26} />}
+          text="br1ansouza"
+        />
       </Box>
     </Box>
   );
 }
+
+const ContactItem = ({ href, icon, text }: { href: string; icon: React.ReactNode; text: string }) => {
+  const theme = useTheme();
+
+  return (
+    <Box
+      component="a"
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      sx={{
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        gap: "12px",
+        padding: "1.3rem",
+        borderRadius: "14px",
+        backgroundColor: theme.colors.cardBackground,
+        color: theme.colors.textPrimary,
+        textDecoration: "none",
+        fontSize: "1.3rem",
+        fontWeight: "500",
+        transition: "0.3s",
+        boxShadow: "0 4px 14px rgba(0,0,0,0.1)",
+        "&:hover": {
+          backgroundColor: theme.colors.hover,
+          color: theme.colors.textPrimary,
+          transform: "scale(1.05)",
+          boxShadow: "0 8px 18px rgba(255,255,255,0.15)",
+        },
+      }}
+    >
+      {icon} {text}
+    </Box>
+  );
+};

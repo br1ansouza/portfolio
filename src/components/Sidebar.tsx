@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Box, List, ListItem, ListItemButton, ListItemText, IconButton } from "@mui/material";
+import { Box, List, ListItem, ListItemButton, ListItemText, IconButton, Divider } from "@mui/material";
 import { useTheme } from "styled-components";
 import { BsSunFill, BsMoonFill, BsGithub, BsPersonFill, BsFolderFill, BsEnvelopeFill, BsHouseFill } from "react-icons/bs";
 import { FaAward } from "react-icons/fa";
@@ -11,70 +11,73 @@ export function Sidebar() {
   const theme = useTheme();
   const { language, setLanguage } = useLanguage();
   const navigate = useNavigate();
-
   const [darkMode, setDarkMode] = useState(true);
 
-  const toggleTheme = () => {
-    setDarkMode((prevMode) => !prevMode);
-  };
+  const toggleTheme = () => setDarkMode((prevMode) => !prevMode);
 
   const menuItems = [
-    { section: "home", pt: "Início", en: "Home", icon: <BsHouseFill size={20} />, route: "/" },
-    { section: "resume", pt: "Resumo", en: "Resume", icon: <BsPersonFill size={20} />, route: "/resume" },
-    { section: "projects", pt: "Projetos", en: "Projects", icon: <BsFolderFill size={20} />, route: "/projects" },
-    { section: "certificates", pt: "Certificados", en: "Certificates", icon: <FaAward size={20} />, route: "/certificates" },
-    { section: "contact", pt: "Contato", en: "Contact", icon: <BsEnvelopeFill size={20} />, route: "/contact" },
-    { section: "github", pt: "GitHub", en: "GitHub", icon: <BsGithub size={20} />, external: "https://github.com/br1ansouza" },
+    { section: "home", pt: "Início", en: "Home", icon: BsHouseFill, route: "/" },
+    { section: "resume", pt: "Resumo", en: "Resume", icon: BsPersonFill, route: "/resume" },
+    { section: "projects", pt: "Projetos", en: "Projects", icon: BsFolderFill, route: "/projects" },
+    { section: "certificates", pt: "Certificados", en: "Certificates", icon: FaAward, route: "/certificates" },
+    { section: "contact", pt: "Contato", en: "Contact", icon: BsEnvelopeFill, route: "/contact" },
+    { section: "github", pt: "GitHub", en: "GitHub", icon: BsGithub, external: "https://github.com/br1ansouza" },
   ];
 
   return (
     <Box
       sx={{
-        width: "260px",
+        width: "250px",
         height: "100vh",
         position: "fixed",
         top: 0,
         left: 0,
-        backgroundColor: theme.colors.background,
-        padding: "1.5rem",
+        backgroundColor: "rgba(25, 25, 25, 0.9)",
+        backdropFilter: "blur(8px)",
+        padding: "2rem 1.2rem",
         display: "flex",
         flexDirection: "column",
         justifyContent: "space-between",
-        boxShadow: "2px 0 10px rgba(0,0,0,0.2)",
+        boxShadow: "4px 0 15px rgba(0,0,0,0.3)",
+        borderRadius: "0 15px 15px 0",
         zIndex: 100,
       }}
     >
+      {/* Menu */}
       <Box>
         <List>
           {menuItems.map((item, index) => (
             <ListItem key={index} disablePadding>
               <ListItemButton
                 onClick={() => {
-                  if (item.route) {
-                    navigate(item.route);
-                  } else if (item.external) {
-                    window.open(item.external, "_blank");
-                  }
+                  if (item.route) navigate(item.route);
+                  else if (item.external) window.open(item.external, "_blank");
                 }}
                 sx={{
                   display: "flex",
                   alignItems: "center",
-                  gap: "12px",
-                  padding: "0.9rem",
+                  gap: "14px",
+                  padding: "1rem",
                   borderRadius: "10px",
-                  color: theme.colors.textSecondary,
+                  color: theme.colors.textPrimary,
                   fontWeight: "bold",
+                  fontSize: "1.1rem",
                   transition: "0.3s",
-                  fontSize: "1rem",
-                  cursor: "pointer",
                   "&:hover": {
-                    backgroundColor: theme.colors.hover,
-                    color: theme.colors.textPrimary,
+                    backgroundColor: "rgba(255, 255, 255, 0.1)",
                     transform: "scale(1.05)",
+                    boxShadow: "0px 0px 10px rgba(255, 255, 255, 0.15)",
+                    color: theme.colors.hover,
                   },
                 }}
               >
-                {item.icon}
+                <Box
+                  component={motion.div}
+                  sx={{ display: "flex", alignItems: "center", transition: "color 0.3s", color: "inherit" }}
+                >
+                  <item.icon size={22} />
+                </Box>
+
                 <AnimatePresence mode="wait">
                   <motion.span
                     key={language + item.section}
@@ -92,56 +95,24 @@ export function Sidebar() {
         </List>
       </Box>
 
-      <Box sx={{ textAlign: "center", display: "flex", flexDirection: "column", gap: "1rem" }}>
-        <IconButton
-          onClick={toggleTheme}
-          sx={{
-            color: theme.colors.textSecondary,
-            fontSize: "1rem",
-            fontWeight: "bold",
-            width: "100%",
-            padding: "0.9rem",
-            borderRadius: "10px",
-            border: `2px solid ${theme.colors.border}`,
-            transition: "0.3s",
-            "&:hover": {
-              backgroundColor: theme.colors.hover,
-              color: theme.colors.textPrimary,
-              transform: "scale(1.05)",
-            },
-          }}
-        >
+      <Divider sx={{ backgroundColor: "rgba(255,255,255,0.2)", margin: "1rem 0" }} />
+
+      <Box sx={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
+        <StyledButton onClick={toggleTheme}>
           {darkMode ? (
             <>
-              <BsSunFill size={22} style={{ marginRight: "8px" }} />
-              Light Mode
+              <BsSunFill size={22} />
+              <span>Light Mode</span>
             </>
           ) : (
             <>
-              <BsMoonFill size={22} style={{ marginRight: "8px" }} />
-              Dark Mode
+              <BsMoonFill size={22} />
+              <span>Dark Mode</span>
             </>
           )}
-        </IconButton>
+        </StyledButton>
 
-        <IconButton
-          onClick={() => setLanguage(language === "pt" ? "en" : "pt")}
-          sx={{
-            color: theme.colors.textSecondary,
-            fontSize: "1rem",
-            fontWeight: "bold",
-            width: "100%",
-            padding: "0.9rem",
-            borderRadius: "10px",
-            border: `2px solid ${theme.colors.border}`,
-            transition: "0.3s",
-            "&:hover": {
-              backgroundColor: theme.colors.hover,
-              color: theme.colors.textPrimary,
-              transform: "scale(1.05)",
-            },
-          }}
-        >
+        <StyledButton onClick={() => setLanguage(language === "pt" ? "en" : "pt")}>
           <AnimatePresence mode="wait">
             <motion.span
               key={language}
@@ -153,8 +124,36 @@ export function Sidebar() {
               {language === "pt" ? "English" : "Português"}
             </motion.span>
           </AnimatePresence>
-        </IconButton>
+        </StyledButton>
       </Box>
     </Box>
   );
 }
+
+const StyledButton = ({ children, onClick }: { children: React.ReactNode; onClick: () => void }) => {
+  return (
+    <IconButton
+      onClick={onClick}
+      sx={{
+        color: "white",
+        fontSize: "1rem",
+        fontWeight: "bold",
+        width: "100%",
+        padding: "1rem",
+        borderRadius: "10px",
+        backgroundColor: "rgba(255,255,255,0.1)",
+        transition: "0.3s",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        gap: "10px",
+        "&:hover": {
+          backgroundColor: "rgba(255,255,255,0.2)",
+          transform: "scale(1.05)",
+        },
+      }}
+    >
+      {children}
+    </IconButton>
+  );
+};
