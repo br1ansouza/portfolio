@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Box, List, ListItem, ListItemButton, ListItemText, IconButton, Divider } from "@mui/material";
+import { Box, List, ListItem, ListItemButton, ListItemText, IconButton } from "@mui/material";
 import { useTheme } from "styled-components";
 import { BsSunFill, BsMoonFill, BsGithub, BsPersonFill, BsFolderFill, BsEnvelopeFill, BsHouseFill } from "react-icons/bs";
 import { FaAward } from "react-icons/fa";
@@ -43,7 +43,6 @@ export function Sidebar() {
         zIndex: 100,
       }}
     >
-      {/* Menu */}
       <Box>
         <List>
           {menuItems.map((item, index) => (
@@ -94,8 +93,6 @@ export function Sidebar() {
           ))}
         </List>
       </Box>
-
-      <Divider sx={{ backgroundColor: "rgba(255,255,255,0.2)", margin: "1rem 0" }} />
 
       <Box sx={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
         <StyledButton onClick={toggleTheme}>

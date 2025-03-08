@@ -9,7 +9,7 @@ import { Contact } from "./pages/Contact";
 import { Box } from "@mui/material";
 import { LanguageProvider } from "./contexts/LanguageContext";
 import { Sidebar } from "./components/Sidebar";
-import LoadingScreen from "./components/LoadingScreen";
+import  LoadingScreen  from "./components/LoadingScreen";
 
 function App() {
   const [loading, setLoading] = useState(true);

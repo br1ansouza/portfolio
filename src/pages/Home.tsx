@@ -1,6 +1,5 @@
 import { Box } from "@mui/material";
 import { ProfileCard } from "../components/ProfileCard";
-import { Technologies } from "../components/Technologies";
 import { useTheme } from "styled-components";
 import { Sidebar } from "../components/Sidebar";
 
@@ -13,7 +12,7 @@ export function Home() {
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
-        minHeight: "100vh",
+        minHeight: "90vh",
         backgroundColor: theme.colors.background,
         padding: "1rem",
       }}
@@ -46,9 +45,6 @@ export function Home() {
           marginTop: "2rem",
         }}
       >
-
-        <Technologies />
-        
       </Box>
     </Box>
   );

@@ -1,142 +1,164 @@
-import { useState } from "react";
-import { Box, Typography, Avatar, Paper, Collapse } from "@mui/material";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import { motion, AnimatePresence } from "framer-motion";
-import profileImage from "../assets/profile-images/profile-image.jpg";
+import { Box, Typography, Avatar, Grid, Paper, Tooltip } from "@mui/material";
+import { motion } from "framer-motion";
 import { useTheme } from "styled-components";
 import { useLanguage } from "../contexts/LanguageContext";
+import profileImage from "../assets/profile-images/profile-image.jpg";
+import { BsCodeSlash, BsDatabase, BsWrench } from "react-icons/bs";
+import { FaReact, FaBootstrap, FaGitAlt, FaDocker, FaNodeJs } from "react-icons/fa";
+import { SiJavascript, SiTypescript, SiMui, SiPostgresql, SiMariadb, SiPostman } from "react-icons/si";
 
 export function ProfileCard() {
-  const [expanded, setExpanded] = useState(false);
   const theme = useTheme();
   const { language } = useLanguage();
 
-  const profileText =
+  const aboutTitle = language === "pt" ? "Sobre Mim" : "About Me";
+  const aboutText =
     language === "pt"
-      ? `Sou estudante de Análise e Desenvolvimento de Sistemas e Desenvolvedor Full Stack, apaixonado por tecnologia e inovação.
-         Tenho experiência na configuração de equipamentos de rede e servidores em ambientes Ubuntu/Debian e Windows, além de certificações
-         em arquitetura de redes e fundamentos de programação.
+      ? `Desenvolvedor Full Stack com experiência em redes, infraestrutura e desenvolvimento de aplicações web e mobile. Trabalho com React, TypeScript, React Native no Front-end e Node.js, Express, TypeORM no Back-end, utilizando bancos de dados PostgreSQL e MariaDB. Tenho experiência com autenticação JWT, segurança e ferramentas como Git, Docker, Postman e Swagger.`
+      : `Full Stack Developer with experience in networking, infrastructure, and web and mobile application development. I work with React, TypeScript, React Native on the Front-end and Node.js, Express, TypeORM on the Back-end, using PostgreSQL and MariaDB databases. I have experience with JWT authentication, security, and tools like Git, Docker, Postman, and Swagger.`;
 
-         Possuo sólidos conhecimentos em desenvolvimento web, com foco em tecnologias Front-end como HTML5, CSS, JavaScript, TypeScript e React Native.
-         Estou sempre aprimorando minhas habilidades e buscando soluções inovadoras para construir aplicações eficientes, seguras e escaláveis.`
-      : `I am a student of Systems Analysis and Development and a Full Stack Developer, passionate about technology and innovation.
-         I have experience in configuring network equipment and servers in Ubuntu/Debian and Windows environments, as well as certifications
-         in network architecture and programming fundamentals.
-
-         I have solid knowledge in web development, focusing on Frontend technologies such as HTML5, CSS, JavaScript, TypeScript, and React Native.
-         I am constantly improving my skills and seeking innovative solutions to build efficient, secure, and scalable applications.`;
+  const categories = [
+    {
+      title: "Frontend Development",
+      icon: <BsCodeSlash size={28} />,
+      color: "#007BFF",
+      techIcons: [
+        { name: "JavaScript", icon: <SiJavascript />, color: "#F7DF1E" },
+        { name: "TypeScript", icon: <SiTypescript />, color: "#3178C6" },
+        { name: "React", icon: <FaReact />, color: "#61DAFB" },
+        { name: "Bootstrap", icon: <FaBootstrap />, color: "#7952B3" },
+        { name: "MUI", icon: <SiMui />, color: "#0081CB" },
+      ],
+    },
+    {
+      title: "Backend Development",
+      icon: <FaNodeJs size={28} />,
+      color: "#00B74A",
+      techIcons: [{ name: "Node.js", icon: <FaNodeJs />, color: "#339933" }],
+    },
+    {
+      title: "Database Design",
+      icon: <BsDatabase size={28} />,
+      color: "#8E2DE2",
+      techIcons: [
+        { name: "PostgreSQL", icon: <SiPostgresql />, color: "#336791" },
+        { name: "MariaDB", icon: <SiMariadb />, color: "#003545" },
+      ],
+    },
+    {
+      title: "Tools",
+      icon: <BsWrench size={28} />,
+      color: "#FFD700",
+      techIcons: [
+        { name: "Git", icon: <FaGitAlt />, color: "#F05032" },
+        { name: "Docker", icon: <FaDocker />, color: "#2496ED" },
+        { name: "Postman", icon: <SiPostman />, color: "#FF6C37" },
+      ],
+    },
+  ];
 
   return (
-    <Paper
-      component={motion.div}
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
-      elevation={6}
-      onClick={() => setExpanded(!expanded)}
+    <Box
       sx={{
-        backgroundColor: theme.colors.cardBackground,
-        borderRadius: "12px",
-        padding: "1.5rem",
+        display: "flex",
+        flexDirection: { xs: "column", md: "row" },
+        alignItems: "center",
+        justifyContent: "space-between",
+        textAlign: "left",
+        maxWidth: "1100px",
         width: "100%",
-        maxWidth: "950px",
-        cursor: "pointer",
-        border: `2px solid ${expanded ? theme.colors.hover : "transparent"}`,
-        position: "relative",
-        "&:hover": {
-          transform: "scale(1.02)",
-          boxShadow: `0px 0px 15px ${theme.colors.hover}`,
-          borderColor: theme.colors.hover,
-        },
+        margin: "0 auto",
       }}
     >
-      <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 1 }}>
-        <Avatar
-          src={profileImage}
-          sx={{
-            width: 100,
-            height: 100,
-            border: `3px solid ${theme.colors.hover}`,
-          }}
-        />
-
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={language}
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 10 }}
-            transition={{ duration: 0.4 }}
-          >
-            <Typography variant="h5" fontWeight="bold" color={theme.colors.textPrimary}>
-              {language === "pt" ? "Olá! Eu sou Brian 👋" : "Hi! I'm Brian 👋"}
-            </Typography>
-          </motion.div>
-        </AnimatePresence>
-
-        {!expanded && (
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={language + "-sub"}
-              initial={{ opacity: 0, y: -5 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: 5 }}
-              transition={{ duration: 0.4 }}
-            >
-              <Typography variant="body1" color={theme.colors.textSecondary} sx={{ textAlign: "center", mt: 0.5 }}>
-                {language === "pt" ? "Apaixonado por desenvolvimento Front-end" : "Passionate about Frontend Development"}
-              </Typography>
-            </motion.div>
-          </AnimatePresence>
-        )}
-      </Box>
-
-      <Box
-        sx={{
-          display: "flex",
-          justifyContent: "center",
-          mt: 1,
-          transition: "transform 0.3s ease-in-out",
-        }}
+      <motion.div
+        animate={{ rotate: 360 }}
+        transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+        style={{ position: "relative", display: "inline-block" }}
       >
-        <motion.div
-          animate={{ rotate: expanded ? 180 : 0 }}
-          transition={{ duration: 0.3 }}
+        <Box
+          sx={{
+            position: "relative",
+            display: "inline-block",
+            borderRadius: "50%",
+            padding: "6px",
+            background: "linear-gradient(135deg, #6C1EE9, #F321E2)",
+            boxShadow: "0px 0px 35px 8px rgba(108, 30, 233, 0.6)",
+          }}
         >
-          <ExpandMoreIcon
+          <Avatar
+            src={profileImage}
             sx={{
-              color: theme.colors.textSecondary,
-              fontSize: "2rem",
+              width: 180,
+              height: 180,
             }}
           />
-        </motion.div>
-      </Box>
+        </Box>
+      </motion.div>
 
-      <Collapse in={expanded} timeout="auto" unmountOnExit>
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={language + "-text"}
-            initial={{ opacity: 0, x: -10 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: 10 }}
-            transition={{ duration: 0.4 }}
-          >
-            <Typography
-              variant="body1"
-              sx={{
-                mt: 2,
-                color: theme.colors.textPrimary,
-                whiteSpace: "pre-line",
-                textAlign: "justify",
-                lineHeight: "1.6",
-                transition: "opacity 0.3s ease-in-out",
-              }}
-            >
-              {profileText}
-            </Typography>
-          </motion.div>
-        </AnimatePresence>
-      </Collapse>
-    </Paper>
+      <Box sx={{ flex: 1, paddingLeft: { md: "3rem" }, maxWidth: "850px" }}>
+        <Typography variant="h3" sx={{ fontWeight: "bold", color: theme.colors.hover, mb: 2 }}>
+          {aboutTitle}
+        </Typography>
+
+        <Typography variant="body1" sx={{ color: theme.colors.textSecondary, lineHeight: "1.8", fontSize: "1.1rem" }}>
+          {aboutText}
+        </Typography>
+
+        <Grid container spacing={2} justifyContent="flex-start" sx={{ mt: 3 }}>
+          {categories.map((category, index) => (
+            <Grid item xs={12} sm={6} md={4} key={index}>
+              <Paper
+                component={motion.div}
+                whileHover={{ scale: 1.05 }}
+                transition={{ duration: 0.3 }}
+                elevation={6}
+                sx={{
+                  padding: "1.5rem",
+                  borderRadius: "12px",
+                  backgroundColor: theme.colors.cardBackground,
+                  textAlign: "center",
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  height: "230px",
+                  gap: "10px",
+                  borderLeft: `5px solid ${theme.colors.hover}`,
+                }}
+              >
+                <Box
+                  sx={{
+                    fontSize: "2rem",
+                    color: category.color,
+                    transition: "0.3s",
+                    "&:hover": {
+                      filter: "brightness(1.5)",
+                    },
+                  }}
+                >
+                  {category.icon}
+                </Box>
+
+                <Typography variant="h6" fontWeight="bold" color={theme.colors.textPrimary}>
+                  {category.title}
+                </Typography>
+
+                <Box sx={{ display: "flex", gap: "8px", flexWrap: "wrap", justifyContent: "center" }}>
+                  {category.techIcons.map((tech, i) => (
+                    <Tooltip key={i} title={tech.name} arrow>
+                      <motion.div
+                        whileHover={{ scale: 1.2, color: tech.color }}
+                        style={{ fontSize: "1.8rem", color: "white" }}
+                      >
+                        {tech.icon}
+                      </motion.div>
+                    </Tooltip>
+                  ))}
+                </Box>
+              </Paper>
+            </Grid>
+          ))}
+        </Grid>
+      </Box>
+    </Box>
   );
 }

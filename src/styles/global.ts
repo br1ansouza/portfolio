@@ -12,6 +12,7 @@ export const GlobalStyle = createGlobalStyle`
     color: ${({ theme }) => theme.colors.textPrimary}; // Texto primário
     font-family: 'Inter', sans-serif;
     transition: all 0.3s ease-in-out;
+    overflow-x: hidden;
   }
 
   h1, h2, h3, h4, h5, h6 {
