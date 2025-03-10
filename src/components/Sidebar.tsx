@@ -44,7 +44,7 @@ export function Sidebar() {
       }}
     >
       <Box>
-        <List>
+        <List sx={{ display: "flex", flexDirection: "column", gap: "12px" }}>
           {menuItems.map((item, index) => (
             <ListItem key={index} disablePadding>
               <ListItemButton
@@ -58,15 +58,16 @@ export function Sidebar() {
                   gap: "14px",
                   padding: "1rem",
                   borderRadius: "10px",
-                  color: theme.colors.textPrimary,
+                  color: theme.colors.hover,
                   fontWeight: "bold",
                   fontSize: "1.1rem",
-                  transition: "0.3s",
+                  backgroundColor: "rgba(255, 255, 255, 0.1)",
+                  transition: "0.3s ease-in-out",
                   "&:hover": {
-                    backgroundColor: "rgba(255, 255, 255, 0.1)",
-                    transform: "scale(1.05)",
-                    boxShadow: "0px 0px 10px rgba(255, 255, 255, 0.15)",
-                    color: theme.colors.hover,
+                    backgroundColor: "rgba(255, 255, 255, 0.2)",
+                    transform: "scale(1.08)",
+                    boxShadow: "0px 0px 15px rgba(255, 255, 255, 0.2)",
+                    color: "white",
                   },
                 }}
               >
@@ -89,6 +90,7 @@ export function Sidebar() {
                   </motion.span>
                 </AnimatePresence>
               </ListItemButton>
+
             </ListItem>
           ))}
         </List>

@@ -9,7 +9,7 @@ const certificates = [
     name: { pt: "FrontEnd - Módulo 1 - LAB365", en: "FrontEnd - Module 1 - LAB365" },
     institution: "LAB365",
     date: "2024",
-    icon: <FaCode size={24} />,
+    icon: <FaCode size={28} />,
     color: "#E91E63",
     score: "9.73",
     link: "https://drive.google.com/file/d/1-XHxEg9cCRRAyv5e_1Io2noM_zjEIgb1/view?usp=sharing"
@@ -18,7 +18,7 @@ const certificates = [
     name: { pt: "Desenvolvimento Web Compacto e Completo", en: "Complete and Compact Web Development" },
     institution: "Udemy",
     date: "2023",
-    icon: <FaCode size={24} />,
+    icon: <FaCode size={28} />,
     color: "#2196F3",
     link: "https://drive.google.com/file/d/1F7iHWIBZL1z_ESQ8g4nn_zHeedvTjOjF/view?usp=sharing"
   },
@@ -26,7 +26,7 @@ const certificates = [
     name: { pt: "Fundamentos de Programação", en: "Programming Fundamentals" },
     institution: "Udemy",
     date: "2022",
-    icon: <FaServer size={24} />,
+    icon: <FaServer size={28} />,
     color: "#4CAF50",
     link: "https://drive.google.com/file/d/1AUksurChYYHK9Xk61tbU8iOD1BNWe0ad/view?usp=sharing"
   },
@@ -34,7 +34,7 @@ const certificates = [
     name: { pt: "Git", en: "Git" },
     institution: "Udemy",
     date: "2022",
-    icon: <FaGitAlt size={24} />,
+    icon: <FaGitAlt size={28} />,
     color: "#FF9800",
     link: "https://drive.google.com/file/d/1Kgrh015VJbjAs9087GGBf9vQxZEhaNFT/view?usp=sharing"
   },
@@ -42,7 +42,7 @@ const certificates = [
     name: { pt: "Arquitetura de Redes", en: "Network Architecture" },
     institution: "Udemy",
     date: "2023",
-    icon: <FaNetworkWired size={24} />,
+    icon: <FaNetworkWired size={28} />,
     color: "#9C27B0",
     link: "https://drive.google.com/file/d/1u-_zNT4k-cAbBc5vBg73ONCtUj-3-jxD/view?usp=sharing"
   },
@@ -50,7 +50,7 @@ const certificates = [
     name: { pt: "Proxmox - Professional", en: "Proxmox - Professional" },
     institution: "Udemy",
     date: "2023",
-    icon: <FaDocker size={24} />,
+    icon: <FaDocker size={28} />,
     color: "#00ACC1",
     link: "https://drive.google.com/file/d/1xQC7fbBYRnFmgEG8sqMlX8-rObgjOuQ5/view?usp=sharing"
   },
@@ -89,7 +89,7 @@ export function CertificatesPage() {
           color: theme.colors.hover,
         }}
       >
-        <FaAward size={32} />
+        <FaAward size={36} />
         <AnimatePresence mode="wait">
           <motion.span
             key={language}
@@ -103,32 +103,31 @@ export function CertificatesPage() {
         </AnimatePresence>
       </Typography>
 
-
-      <Grid container spacing={3} justifyContent="center">
+      <Grid container spacing={4} justifyContent="center">
         {certificates.map((cert, index) => (
           <Grid item xs={12} sm={6} md={4} key={index}>
             <Paper
               component={motion.div}
-              whileHover={{ scale: 1.03, boxShadow: "0px 0px 20px rgba(255, 255, 255, 0.1)" }}
-              transition={{ duration: 0.3 }}
-              elevation={6}
+              whileHover={{ scale: 1.05, boxShadow: `0px 0px 15px ${cert.color}` }}
+              transition={{ duration: 0.1 }}
+              elevation={8}
               sx={{
-                height: "180px",
-                padding: "1.5rem",
-                borderRadius: "12px",
+                height: "200px",
+                padding: "2rem",
+                borderRadius: "15px",
                 backgroundColor: theme.colors.cardBackground,
-                textAlign: "left",
+                textAlign: "center",
                 cursor: "pointer",
                 display: "flex",
                 flexDirection: "column",
                 justifyContent: "center",
-                alignItems: "flex-start",
+                alignItems: "center",
                 gap: "10px",
-                borderLeft: `5px solid ${cert.color}`,
-                transition: "0.3s",
+                border: `2px solid ${cert.color}`,
+                transition: "0.3s ease-in-out",
                 "&:hover": {
-                  transform: "scale(1.02)",
-                  filter: "brightness(1.1)",
+                  transform: "scale(1.05)",
+                  backgroundColor: "rgba(255, 255, 255, 0.1)",
                 },
               }}
               onClick={() => window.open(cert.link, "_blank")}
@@ -137,10 +136,11 @@ export function CertificatesPage() {
                 sx={{
                   display: "flex",
                   alignItems: "center",
+                  justifyContent: "center",
                   gap: "10px",
                   color: cert.color,
                   fontWeight: "bold",
-                  fontSize: "1.1rem",
+                  fontSize: "1.2rem",
                 }}
               >
                 {cert.icon}

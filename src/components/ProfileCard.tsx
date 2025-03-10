@@ -14,8 +14,8 @@ export function ProfileCard() {
   const aboutTitle = language === "pt" ? "Sobre Mim" : "About Me";
   const aboutText =
     language === "pt"
-      ? `Desenvolvedor Full Stack com experiência em redes, infraestrutura e desenvolvimento de aplicações web e mobile. Trabalho com React, TypeScript, React Native no Front-end e Node.js, Express, TypeORM no Back-end, utilizando bancos de dados PostgreSQL e MariaDB. Tenho experiência com autenticação JWT, segurança e ferramentas como Git, Docker, Postman e Swagger.`
-      : `Full Stack Developer with experience in networking, infrastructure, and web and mobile application development. I work with React, TypeScript, React Native on the Front-end and Node.js, Express, TypeORM on the Back-end, using PostgreSQL and MariaDB databases. I have experience with JWT authentication, security, and tools like Git, Docker, Postman, and Swagger.`;
+      ? `Desenvolvedor Front End com experiência em redes, infraestrutura e desenvolvimento de aplicações web e mobile. Trabalho com React, TypeScript, React Native no Front-end e Node.js, Express, TypeORM no Back-end, utilizando bancos de dados PostgreSQL e MariaDB. Tenho experiência com autenticação JWT, segurança e ferramentas como Git, Docker, Postman e Swagger.`
+      : `Front End Developer with experience in networking, infrastructure, and web and mobile application development. I work with React, TypeScript, React Native on the Front-end and Node.js, Express, TypeORM on the Back-end, using PostgreSQL and MariaDB databases. I have experience with JWT authentication, security, and tools like Git, Docker, Postman, and Swagger.`;
 
   const categories = [
     {
