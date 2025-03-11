@@ -5,7 +5,7 @@ import { useTheme } from 'styled-components';
 import styled from 'styled-components';
 import { projects } from '../components/ProjectsScreen/ProjectsCard';
 import { useLanguage } from '../contexts/LanguageContext';
-import ProjectModal from '../components/ProjectsScreen/ProjectModal';
+import ProjectModal from '../components/ProjectsScreen/ProjectsModal';
 
 const ProjectsContainer = styled(Box)`
   position: relative;
@@ -23,15 +23,16 @@ const ProjectCard = styled(Paper)`
   position: relative;
   overflow: hidden;
   width: 300px;
-  height: 350px;
+  height: 380px; /* Ajustado para mais espaço */
   border-radius: 16px;
   cursor: pointer;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   background-color: ${({ theme }) => theme.colors.cardBackground};
+  box-shadow: none;
 
   &:hover {
     transform: scale(1.05);
-    box-shadow: 0px 6px 25px ${({ theme }) => theme.colors.hover};
+    box-shadow: 0px 6px 25px ${({ theme }) => theme.colors.border};
   }
 `;
 
@@ -40,23 +41,41 @@ const ProjectImage = styled(Box)`
   height: 220px;
   background-size: cover;
   background-position: center;
-  border-radius: 16px 16px 0 0;
+  background-repeat: no-repeat;
+  display: block;
+  border-radius: 0;
 `;
 
 const ProjectInfo = styled(Box)`
-  padding: 2rem;
-  position: relative;
-  border-radius: 0 0 16px 16px;
+  padding: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+`;
+
+const TechContainer = styled(Box)`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  margin-top: auto;
+  padding-top: 1rem;
+  width: 100%;
 `;
 
 const TechChip = styled(Chip)`
   background-color: ${({ theme }) => theme.colors.border};
-  color: ${({ theme }) => theme.colors.textPrimary};
-  margin: 6px;
-  transition: transform 0.2s;
+  color: ${({ theme }) => theme.colors.cardBackground};
+  padding: 4px 10px;
+  font-size: 0.85rem;
+  font-weight: bold;
+  border-radius: 16px;
+  transition: transform 0.2s, background-color 0.2s;
 
   &:hover {
     transform: scale(1.1);
+    background-color: ${({ theme }) => theme.colors.hover};
   }
 `;
 
@@ -75,6 +94,8 @@ export function Projects() {
     setOpen(false);
     setSelectedProject(null);
   };
+
+  console.log("Projetos carregados:", projects);
 
   return (
     <ProjectsContainer>
@@ -112,15 +133,20 @@ export function Projects() {
                   <ProjectImage style={{ backgroundImage: `url(${project.coverImage})` }} />
                 )}
                 <ProjectInfo>
-                  <Typography variant="h6" fontWeight="bold" mb={1} color={theme.colors.textPrimary}>
+                  <Typography variant="h6" fontWeight="bold" mb={1} color={theme.colors.cardBackground}>
                     {project.title}
                   </Typography>
-                  <Typography variant="body2" mb={2} color={theme.colors.textSecondary}>
+                  <Typography variant="body2" mb={2} color={theme.colors.border}>
                     {project.description}
                   </Typography>
-                  <Box sx={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
-                    {project.technologies.map((tech, i) => <TechChip key={i} label={tech} />)}
-                  </Box>
+
+                  {project.technologies && project.technologies.length > 0 && (
+                    <TechContainer>
+                      {project.technologies.map((tech, i) => (
+                        <TechChip key={i} label={tech} />
+                      ))}
+                    </TechContainer>
+                  )}
                 </ProjectInfo>
               </ProjectCard>
             </motion.div>

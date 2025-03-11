@@ -16,8 +16,9 @@ export const projects = [
     technologies: ["Next.js", "Tailwind", "MySQL"],
     coverImage: "src/assets/projects-images/app-webcarros/tela-logo-webcarros.webp",
     images: [
-      "/src/assets/projects-images/ecommerce/tela_catalogo.png",
-      "/src/assets/projects-images/ecommerce/tela_checkout.png"
+      "src/assets/projects-images/app-webcarros/tela-login-webcarros.png",
+      "src/assets/projects-images/app-webcarros/tela-veiculos-webcarros.png",
+      "src/assets/projects-images/app-webcarros/tela-avaliacao-webcarros.png"
     ],
     keyFeatures: ["Product catalog", "Shopping cart", "Payment integration"],
   }
