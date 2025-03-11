@@ -6,7 +6,8 @@ export const projects = [
     coverImage: "/src/assets/projects-images/app-farmacia/tela-logo-farmacia.webp",
     images: [
       "/src/assets/projects-images/app-farmacia/tela_home.png",
-      "/src/assets/projects-images/app-farmacia/tela_users.png"
+      "/src/assets/projects-images/app-farmacia/tela_users.png",
+      "/src/assets/projects-images/app-farmacia/tela_movimentacoes.png"
     ],
     keyFeatures: ["Real-time messaging", "User profiles", "Post sharing"],
   },
