@@ -1,11 +1,11 @@
 export const theme = {
     colors: {
-      background: "#212224",
-      cardBackground: "#333639",
-      textPrimary: "#E3ECED",
-      textSecondary: "#cbcbcb",
-      hover: "#b561ed",
-      border: "#55585a",
+      background: "#212224",   //: #212224
+      cardBackground: "#333639", // #333639
+      textPrimary: "#E3ECED",// #E3ECED
+      textSecondary: "#cbcbcb",// #cbcbcb
+      hover: "#b561ed",// #b561ed
+      border: "#55585a",// #55585a
     },
   };
   
@@ -14,3 +14,11 @@ export const theme = {
   // Prata Metálico → #C0C0C0
   // Cinza Escuro → #4B4B4B
   // Branco  → #FFFFFF
+
+
+  //: #212224
+  //cardBackground: #333639
+  //textPrimary: #E3ECED
+  //textSecondary: #cbcbcb
+  //hover: #b561ed
+  //border: #55585a

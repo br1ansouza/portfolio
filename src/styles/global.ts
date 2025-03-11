@@ -8,8 +8,8 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   body {
-    background-color: ${({ theme }) => theme.colors.background}; // Agora aplica corretamente
-    color: ${({ theme }) => theme.colors.textPrimary}; // Texto primário
+    background-color: ${({ theme }) => theme.colors.background};
+    color: ${({ theme }) => theme.colors.textPrimary};
     font-family: 'Inter', sans-serif;
     transition: all 0.3s ease-in-out;
     overflow-x: hidden;

@@ -96,7 +96,28 @@ export function ProfileCard() {
       </motion.div>
 
       <Box sx={{ flex: 1, paddingLeft: { md: "3rem" }, maxWidth: "850px" }}>
-        <Typography variant="h3" sx={{ fontWeight: "bold", color: theme.colors.hover, mb: 2 }}>
+        <Typography
+          component={motion.h3}
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          fontWeight="bold"
+          mb={2}
+          sx={{
+            fontSize: "3rem",
+            fontFamily: "'Poppins', sans-serif",
+            background: "linear-gradient(90deg, #ff0080, #00bfff, #ff0080)",
+            backgroundSize: "200% auto",
+            WebkitBackgroundClip: "text",
+            WebkitTextFillColor: "transparent",
+            animation: "gradientAnimation 4s linear infinite",
+            "@keyframes gradientAnimation": {
+              "0%": { backgroundPosition: "0% 50%" },
+              "50%": { backgroundPosition: "100% 50%" },
+              "100%": { backgroundPosition: "0% 50%" }
+            },
+          }}
+        >
           {aboutTitle}
         </Typography>
 

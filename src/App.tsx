@@ -6,10 +6,11 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Home } from "./pages/Home";
 import { CertificatesPage } from "./pages/Certificates";
 import { Contact } from "./pages/Contact";
+import Projects  from "./pages/Projects";
 import { Box } from "@mui/material";
 import { LanguageProvider } from "./contexts/LanguageContext";
 import { Sidebar } from "./components/Sidebar";
-import  LoadingScreen  from "./components/LoadingScreen";
+import LoadingScreen from "./components/LoadingScreen";
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -32,6 +33,7 @@ function App() {
                 <Route path="/" element={<Home />} />
                 <Route path="/certificates" element={<CertificatesPage />} />
                 <Route path="/contact" element={<Contact />} />
+                <Route path="/projects" element={<Projects />} />
               </Routes>
             </Box>
           </Router>

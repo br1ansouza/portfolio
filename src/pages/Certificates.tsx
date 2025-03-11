@@ -1,8 +1,8 @@
 import { Box, Typography, Paper, Grid } from "@mui/material";
 import { useTheme } from "styled-components";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { useLanguage } from "../contexts/LanguageContext";
-import { FaAward, FaCode, FaNetworkWired, FaGitAlt, FaServer, FaDocker } from "react-icons/fa";
+import { FaCode, FaNetworkWired, FaGitAlt, FaServer, FaDocker } from "react-icons/fa";
 
 const certificates = [
   {
@@ -61,119 +61,97 @@ export function CertificatesPage() {
   const { language } = useLanguage();
 
   return (
-    <Box
-      component={motion.div}
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
-      sx={{
-        maxWidth: "1000px",
-        margin: "auto",
-        padding: "3rem 1rem",
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-      }}
-    >
-      <Typography
-        variant="h2"
-        fontWeight="bold"
-        mb={4}
+    <Box sx={{ position: "relative", width: "100%", minHeight: "100vh", overflow: "hidden" }}>
+      <Box
+        component={motion.div}
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
         sx={{
+          position: "relative",
+          zIndex: 1,
+          maxWidth: "1100px",
+          margin: "auto",
+          padding: "6rem 1rem",
           display: "flex",
-          justifyContent: "center",
+          flexDirection: "column",
           alignItems: "center",
-          gap: "12px",
-          fontFamily: "'Poppins', sans-serif",
-          letterSpacing: "1px",
-          color: theme.colors.hover,
         }}
       >
-        <FaAward size={36} />
-        <AnimatePresence mode="wait">
-          <motion.span
-            key={language}
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 10 }}
-            transition={{ duration: 0.3 }}
-          >
-            {language === "pt" ? "Minhas Certificações" : "My Certification Journey"}
-          </motion.span>
-        </AnimatePresence>
-      </Typography>
+        <Typography
+          component={motion.h2}
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          fontWeight="bold"
+          mb={4}
+          sx={{
+            fontSize: "3rem",
+            fontFamily: "'Poppins', sans-serif",
+            background: "linear-gradient(90deg, #ff0080, #00bfff, #ff0080)",
+            backgroundSize: "200% auto",
+            WebkitBackgroundClip: "text",
+            WebkitTextFillColor: "transparent",
+            animation: "gradientAnimation 4s linear infinite",
+            "@keyframes gradientAnimation": {
+              "0%": { backgroundPosition: "0% 50%" },
+              "50%": { backgroundPosition: "100% 50%" },
+              "100%": { backgroundPosition: "0% 50%" }
+            },
+          }}
+        >
+          {language === "pt" ? "Minhas Certificações" : "My Certification Journey"} ✨
+        </Typography>
 
-      <Grid container spacing={4} justifyContent="center">
-        {certificates.map((cert, index) => (
-          <Grid item xs={12} sm={6} md={4} key={index}>
-            <Paper
-              component={motion.div}
-              whileHover={{ scale: 1.05, boxShadow: `0px 0px 15px ${cert.color}` }}
-              transition={{ duration: 0.1 }}
-              elevation={8}
-              sx={{
-                height: "200px",
-                padding: "2rem",
-                borderRadius: "15px",
-                backgroundColor: theme.colors.cardBackground,
-                textAlign: "center",
-                cursor: "pointer",
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "center",
-                alignItems: "center",
-                gap: "10px",
-                border: `2px solid ${cert.color}`,
-                transition: "0.3s ease-in-out",
-                "&:hover": {
-                  transform: "scale(1.05)",
-                  backgroundColor: "rgba(255, 255, 255, 0.1)",
-                },
-              }}
-              onClick={() => window.open(cert.link, "_blank")}
-            >
-              <Box
+        <Grid container spacing={4} justifyContent="center">
+          {certificates.map((cert, index) => (
+            <Grid item xs={12} sm={6} md={4} key={index}>
+              <Paper
+                component={motion.div}
+                whileHover={{ scale: 1.05, boxShadow: `0px 0px 15px ${cert.color}` }}
+                transition={{ duration: 0.2 }}
+                elevation={8}
                 sx={{
+                  height: "220px",
+                  padding: "2rem",
+                  borderRadius: "15px",
+                  backgroundColor: theme.colors.cardBackground,
+                  textAlign: "center",
+                  cursor: "pointer",
                   display: "flex",
-                  alignItems: "center",
+                  flexDirection: "column",
                   justifyContent: "center",
+                  alignItems: "center",
                   gap: "10px",
-                  color: cert.color,
-                  fontWeight: "bold",
-                  fontSize: "1.2rem",
+                  border: `3px solid ${cert.color}`,
+                  transition: "0.3s ease-in-out",
+                  "&:hover": {
+                    transform: "scale(1.05)",
+                    backgroundColor: "rgba(255, 255, 255, 0.1)",
+                  },
                 }}
+                onClick={() => window.open(cert.link, "_blank")}
               >
-                {cert.icon}
-                <AnimatePresence mode="wait">
-                  <motion.span
-                    key={language + cert.name.pt}
-                    initial={{ opacity: 0, y: -5 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: 5 }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    {cert.name[language as keyof typeof cert.name]}
-                  </motion.span>
-                </AnimatePresence>
-              </Box>
-
-              <Typography variant="body2" color={theme.colors.textSecondary}>
-                📍 {cert.institution}
-              </Typography>
-
-              <Typography variant="body2" color={theme.colors.textSecondary}>
-                📅 {cert.date}
-              </Typography>
-
-              {cert.name.pt === "FrontEnd - Módulo 1 - LAB365" && (
-                <Typography variant="body2" fontWeight="bold" color={theme.colors.textPrimary}>
-                  ⭐ {language === "pt" ? "Média Final" : "Final Score"}: {cert.score}
+                <Box sx={{ display: "flex", alignItems: "center", gap: "10px", color: cert.color, fontWeight: "bold", fontSize: "1.3rem" }}>
+                  {cert.icon}
+                  {cert.name[language as keyof typeof cert.name]}
+                </Box>
+                <Typography variant="body2" color={theme.colors.textSecondary}>
+                  📍 {cert.institution}
                 </Typography>
-              )}
-            </Paper>
-          </Grid>
-        ))}
-      </Grid>
+                <Typography variant="body2" color={theme.colors.textSecondary}>
+                  📅 {cert.date}
+                </Typography>
+                {cert.name.pt === "FrontEnd - Módulo 1 - LAB365" && (
+                  <Typography variant="body2" fontWeight="bold" color={theme.colors.textPrimary}>
+                    ⭐ {language === "pt" ? "Média Final" : "Final Score"}: {cert.score}
+                  </Typography>
+                )}
+              </Paper>
+            </Grid>
+          ))}
+        </Grid>
+      </Box>
     </Box>
   );
 }
