@@ -1,10 +1,11 @@
-import { Box, Typography, Modal, Button } from '@mui/material';
+import { Box, Typography, Modal, Button, Chip } from '@mui/material';
 import styled from 'styled-components';
 import { useTheme } from 'styled-components';
 
 interface Project {
   title: string;
   description: string;
+  fullDescription?: string;
   technologies: string[];
   images?: string[];
   keyFeatures?: string[];
@@ -21,12 +22,11 @@ const ModalContent = styled(Box)`
   background-color: ${({ theme }) => theme.colors.cardBackground};
   border-radius: 16px;
   outline: none;
-  max-width: 700px;
+  max-width: 900px;
   width: 90%;
-  max-height: 85vh;
+  max-height: 90vh;
   overflow-y: auto;
   box-shadow: 0px 10px 40px rgba(0, 0, 0, 0.5);
-  transform: translateY(-30px);
   animation: fadeSlideIn 0.3s ease-out forwards;
 
   @keyframes fadeSlideIn {
@@ -42,25 +42,79 @@ const StyledButton = styled(Button)`
   padding: 10px 20px;
   text-transform: none;
   font-weight: bold;
-  transition: background-color 0.3s, transform 0.2s;
+  border: 2px solid ${({ theme }) => theme.colors.border};
+  transition: background-color 0.3s, transform 0.2s, border 0.2s;
 
   &:hover {
     background-color: ${({ theme }) => theme.colors.buttonHover};
     transform: scale(1.05);
+    border: 2px solid ${({ theme }) => theme.colors.buttonHover};
   }
 `;
 
 const ImageContainer = styled(Box)`
-  display: flex;
-  gap: 10px;
-  overflow-x: auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 15px;
   margin-top: 1rem;
 
   img {
-    max-width: 30%;
+    width: 100%;
     height: auto;
     border-radius: 8px;
     box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s, box-shadow 0.3s;
+
+    &:hover {
+      transform: scale(1.05);
+      box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.3);
+    }
+  }
+`;
+
+const TechContainer = styled(Box)`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 1rem 0;
+`;
+
+const StyledChip = styled(Chip)`
+  background-color: #ff5722;
+  color: white;
+  font-weight: bold;
+  border-radius: 20px;
+  padding: 8px 16px;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s, transform 0.2s;
+
+  &:hover {
+    background-color: #e64a19;
+    transform: scale(1.05);
+  }
+`;
+
+const StyledTypography = styled(Typography)`
+  color: ${({ theme }) => theme.colors.textPrimary};
+  font-weight: bold;
+  font-size: 2rem;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+  margin-bottom: 2rem;
+`;
+
+const Description = styled(Typography)`
+  font-size: 1.1rem;
+  color: ${({ theme }) => theme.colors.textSecondary};
+  margin-bottom: 1rem;
+  line-height: 1.6;
+`;
+
+const FeatureList = styled.ul`
+  padding-left: 20px;
+  color: ${({ theme }) => theme.colors.textSecondary};
+
+  li {
+    margin-bottom: 5px;
   }
 `;
 
@@ -73,16 +127,34 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ open, handleClose, project 
         <ModalContent>
           {project && (
             <>
-              <Typography variant="h5" fontWeight="bold" mb={2} color={theme.colors.textPrimary}>{project.title}</Typography>
-              <Typography variant="body1" mb={2} color={theme.colors.textSecondary}>{project.description}</Typography>
-              {project.images && (
+              <StyledTypography mt={2} mb={2}>{project.title}</StyledTypography>
+              {project.images && project.images.length > 0 && (
                 <ImageContainer>
                   {project.images.map((image, index) => (
                     <img key={index} src={image} alt={`Project ${project.title} - ${index + 1}`} />
                   ))}
                 </ImageContainer>
               )}
-              <StyledButton onClick={handleClose}>Close</StyledButton>
+              <Description>{project.description}</Description>
+              {project.fullDescription && (
+                <Description>{project.fullDescription}</Description>
+              )}
+              <TechContainer>
+                {project.technologies.map((tech, index) => (
+                  <StyledChip key={index} label={tech} />
+                ))}
+              </TechContainer>
+              {project.keyFeatures && (
+                <Box>
+                  <Typography variant="h6" fontWeight="bold" mb={1} color={theme.colors.textPrimary}>Funcionalidades</Typography>
+                  <FeatureList>
+                    {project.keyFeatures.map((feature, index) => (
+                      <li key={index}>{feature}</li>
+                    ))}
+                  </FeatureList>
+                </Box>
+              )}
+              <StyledButton onClick={handleClose} sx={{ mt: 3 }}>Close</StyledButton>
             </>
           )}
         </ModalContent>
