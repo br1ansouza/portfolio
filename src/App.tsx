@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Home } from "./pages/Home";
 import { CertificatesPage } from "./pages/Certificates";
 import { Contact } from "./pages/Contact";
+import { ResumeSection } from "./pages/Resume";
 import Projects  from "./pages/Projects";
 import { Box } from "@mui/material";
 import { LanguageProvider } from "./contexts/LanguageContext";
@@ -34,7 +35,8 @@ function App() {
                 <Route path="/certificates" element={<CertificatesPage />} />
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/projects" element={<Projects />} />
-              </Routes>
+                <Route path="/resume" element={<ResumeSection />} />
+                </Routes>
             </Box>
           </Router>
         )}
