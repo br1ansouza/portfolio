@@ -1,4 +1,4 @@
-import { Box, Typography, Modal, Button, Chip } from '@mui/material';
+import { Box, Typography, Modal, Chip } from '@mui/material';
 import styled from 'styled-components';
 import { useTheme } from 'styled-components';
 
@@ -18,56 +18,40 @@ interface ProjectModalProps {
 }
 
 const ModalContent = styled(Box)`
+  position: relative;
   padding: 2rem;
-  background-color: ${({ theme }) => theme.colors.cardBackground};
+  background-color: rgba(33, 34, 36, 0.85);
   border-radius: 16px;
   outline: none;
   max-width: 900px;
   width: 90%;
   max-height: 90vh;
   overflow-y: auto;
-  box-shadow: 0px 10px 40px rgba(0, 0, 0, 0.5);
-  animation: fadeSlideIn 0.3s ease-out forwards;
-
-  @keyframes fadeSlideIn {
-    from { opacity: 0; transform: translateY(-50px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-`;
-
-const StyledButton = styled(Button)`
-  background-color: ${({ theme }) => theme.colors.buttonBackground};
-  color: ${({ theme }) => theme.colors.buttonText};
-  border-radius: 10px;
-  padding: 10px 20px;
-  text-transform: none;
-  font-weight: bold;
-  border: 2px solid ${({ theme }) => theme.colors.border};
-  transition: background-color 0.3s, transform 0.2s, border 0.2s;
-
-  &:hover {
-    background-color: ${({ theme }) => theme.colors.buttonHover};
-    transform: scale(1.05);
-    border: 2px solid ${({ theme }) => theme.colors.buttonHover};
-  }
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  gap: 1.5rem;
 `;
 
 const ImageContainer = styled(Box)`
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 15px;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
   margin-top: 1rem;
 
   img {
     width: 100%;
     height: auto;
     border-radius: 8px;
-    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
-    transition: transform 0.3s, box-shadow 0.3s;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s;
 
     &:hover {
       transform: scale(1.05);
-      box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.3);
     }
   }
 `;
@@ -75,47 +59,130 @@ const ImageContainer = styled(Box)`
 const TechContainer = styled(Box)`
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
-  margin: 1rem 0;
+  gap: 10px;
+  justify-content: center;
+  padding-top: 1rem;
+  width: 100%;
 `;
 
 const StyledChip = styled(Chip)`
-  background-color: #ff5722;
-  color: white;
-  font-weight: bold;
-  border-radius: 20px;
-  padding: 8px 16px;
-  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
-  transition: background-color 0.3s, transform 0.2s;
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg,rgb(162, 0, 255),rgb(55, 0, 255)) !important;
+  background-size: 250% 250% !important;
+  color: white !important;
+  padding: 5px 12px !important;
+  font-size: 0.9rem !important;
+  font-weight: bold !important;
+  border-radius: 18px !important;
+  border: none !important;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out !important;
 
   &:hover {
-    background-color: #e64a19;
-    transform: scale(1.05);
+    transform: scale(1.08);
+    box-shadow: 0px 4px 15px rgba(128, 0, 255, 0.4);
   }
-`;
 
-const StyledTypography = styled(Typography)`
-  color: ${({ theme }) => theme.colors.textPrimary};
-  font-weight: bold;
-  font-size: 2rem;
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
-  margin-bottom: 2rem;
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg,rgb(55, 0, 255),rgb(162, 0, 255),rgb(55, 0, 255));
+    background-size: 350% 350%;
+    z-index: -1;
+    animation: gradientMoveDiagonal 5s infinite alternate ease-in-out;
+    border-radius: inherit;
+  }
+
+  @keyframes gradientMoveDiagonal {
+    0% {
+      background-position: 0% 0%;
+    }
+    100% {
+      background-position: 100% 100%;
+    }
+  }
 `;
 
 const Description = styled(Typography)`
   font-size: 1.1rem;
-  color: ${({ theme }) => theme.colors.textSecondary};
-  margin-bottom: 1rem;
+  color: ${({ theme }) => theme.colors.modalTextSecondary};
   line-height: 1.6;
+  max-width: 800px;
+  text-align: left;
 `;
 
-const FeatureList = styled.ul`
-  padding-left: 20px;
-  color: ${({ theme }) => theme.colors.textSecondary};
+const FullDescription = styled(Typography)`
+  font-size: 1rem;
+  color: ${({ theme }) => theme.colors.modalTextSecondary};
+  line-height: 1.6;
+  max-width: 800px;
+  text-align: left;
+`;
+
+const FeatureContainer = styled(Box)`
+  width: 100%;
+  max-width: 800px;
+  text-align: left;
+  margin-top: 2rem;
+`;
+
+const FeatureTitle = styled(Typography)`
+  font-size: 1.3rem !important;
+  font-weight: bold;
+  color: ${({ theme }) => theme.colors.modalTextPrimary};
+  margin-bottom: 0.8rem !important;
+`;
+
+const StyledFeatureList = styled.ul`
+  list-style: none;
+  padding-left: 18px;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: ${({ theme }) => theme.colors.textLight};
 
   li {
-    margin-bottom: 5px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 6px;
+    transition: color 0.2s ease-in-out;
+
+    &:before {
+      content: "ᐅ";
+      color: ${({ theme }) => theme.colors.hover};
+      font-size: 1.2rem;
+    }
   }
+`;
+
+const CloseButton = styled.button`
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: transparent;
+  border: none;
+  color: ${({ theme }) => theme.colors.textPrimary};
+  font-size: 1.8rem;
+  cursor: pointer;
+  transition: color 0.2s ease-in-out;
+
+  &:hover {
+    color: ${({ theme }) => theme.colors.hover};
+  }
+`;
+
+const Backdrop = styled(Box)`
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(5px); /* Adiciona o efeito de blur */
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 const ProjectModal: React.FC<ProjectModalProps> = ({ open, handleClose, project }) => {
@@ -123,11 +190,14 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ open, handleClose, project 
 
   return (
     <Modal open={open} onClose={handleClose} closeAfterTransition>
-      <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', backgroundColor: 'rgba(0, 0, 0, 0.5)' }}>
+      <Backdrop>
         <ModalContent>
           {project && (
             <>
-              <StyledTypography mt={2} mb={2}>{project.title}</StyledTypography>
+              <Typography variant="h4" fontWeight="bold" color={theme.colors.modalTextPrimary}>
+                {project.title}
+              </Typography>
+              <Description>{project.description}</Description>
               {project.images && project.images.length > 0 && (
                 <ImageContainer>
                   {project.images.map((image, index) => (
@@ -135,30 +205,27 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ open, handleClose, project 
                   ))}
                 </ImageContainer>
               )}
-              <Description>{project.description}</Description>
-              {project.fullDescription && (
-                <Description>{project.fullDescription}</Description>
-              )}
+              {project.fullDescription && <FullDescription>{project.fullDescription}</FullDescription>}
               <TechContainer>
                 {project.technologies.map((tech, index) => (
                   <StyledChip key={index} label={tech} />
                 ))}
               </TechContainer>
-              {project.keyFeatures && (
-                <Box>
-                  <Typography variant="h6" fontWeight="bold" mb={1} color={theme.colors.textPrimary}>Funcionalidades</Typography>
-                  <FeatureList>
+              {project.keyFeatures && project.keyFeatures.length > 0 && (
+                <FeatureContainer>
+                  <FeatureTitle>Key Features</FeatureTitle>
+                  <StyledFeatureList>
                     {project.keyFeatures.map((feature, index) => (
                       <li key={index}>{feature}</li>
                     ))}
-                  </FeatureList>
-                </Box>
+                  </StyledFeatureList>
+                </FeatureContainer>
               )}
-              <StyledButton onClick={handleClose} sx={{ mt: 3 }}>Close</StyledButton>
+              <CloseButton onClick={handleClose}>&times;</CloseButton>
             </>
           )}
         </ModalContent>
-      </Box>
+      </Backdrop>
     </Modal>
   );
 };

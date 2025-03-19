@@ -17,11 +17,11 @@ export function Sidebar() {
 
   const menuItems = [
     { section: "home", pt: "Início", en: "Home", icon: BsHouseFill, route: "/" },
-    { section: "resume", pt: "Resumo", en: "Resume", icon: BsPersonFill, route: "/resume" },
     { section: "projects", pt: "Projetos", en: "Projects", icon: BsFolderFill, route: "/projects" },
     { section: "certificates", pt: "Certificados", en: "Certificates", icon: FaAward, route: "/certificates" },
     { section: "contact", pt: "Contato", en: "Contact", icon: BsEnvelopeFill, route: "/contact" },
     { section: "github", pt: "GitHub", en: "GitHub", icon: BsGithub, external: "https://github.com/br1ansouza" },
+    { section: "resume", pt: "Resumo", en: "Resume", icon: BsPersonFill, route: "/resume" },
   ];
 
   return (

@@ -1,6 +1,5 @@
 import { useState } from 'react';
-import { Box, Typography, Paper, Grid, Chip } from '@mui/material';
-import { motion } from 'framer-motion';
+import { Box, Typography, Grid, Chip } from '@mui/material';
 import { useTheme } from 'styled-components';
 import styled from 'styled-components';
 import { projects } from '../components/ProjectsScreen/ProjectsCard';
@@ -12,27 +11,39 @@ const ProjectsContainer = styled(Box)`
   width: 100%;
   min-height: 100vh;
   overflow: hidden;
-  padding: 2rem 2rem;
+  padding: 2rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   background-color: ${({ theme }) => theme.colors.background};
 `;
 
-const ProjectCard = styled(Paper)`
+const ProjectCard = styled(Box)`
   position: relative;
   overflow: hidden;
-  width: 300px;
-  height: 380px; /* Ajustado para mais espaço */
-  border-radius: 16px;
+  width: 330px;
+  height: 500px;
+  border-radius: 12px;
   cursor: pointer;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  background-color: ${({ theme }) => theme.colors.cardBackground};
-  box-shadow: none;
+  background-color: rgba(71, 68, 68, 0.45);
+  border: 1px solid ${({ theme }) => theme.colors.border};
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(8px);
 
   &:hover {
-    transform: scale(1.05);
-    box-shadow: 0px 6px 25px ${({ theme }) => theme.colors.border};
+    transform: scale(1.03);
+    box-shadow: 1px 6px 20px rgba(0, 0, 0, 0.3);
+  }
+
+  &:hover .overlay {
+    opacity: 1;
+    backdrop-filter: blur(8px);
+  }
+
+  &:hover .overlay-text {
+    opacity: 1;
+    transform: translateY(0);
   }
 `;
 
@@ -42,40 +53,78 @@ const ProjectImage = styled(Box)`
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  display: block;
   border-radius: 0;
+  position: relative;
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(0px);
+    transition: backdrop-filter 0.3s ease-in-out, opacity 0.3s ease-in-out;
+  }
 `;
 
-const ProjectInfo = styled(Box)`
-  padding: 1.2rem;
+const Overlay = styled(Box)`
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(0px);
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  height: 100%;
-`;
-
-const TechContainer = styled(Box)`
-  display: flex;
-  flex-wrap: wrap;
   justify-content: center;
-  gap: 8px;
-  margin-top: auto;
-  padding-top: 1rem;
-  width: 100%;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out, backdrop-filter 0.3s ease-in-out;
+`;
+
+const OverlayText = styled(Typography)`
+  color: white;
+  font-weight: bold;
+  font-size: 1.2rem;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
 `;
 
 const TechChip = styled(Chip)`
-  background-color: ${({ theme }) => theme.colors.border};
-  color: ${({ theme }) => theme.colors.cardBackground};
-  padding: 4px 10px;
-  font-size: 0.85rem;
-  font-weight: bold;
-  border-radius: 16px;
-  transition: transform 0.2s, background-color 0.2s;
-
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(90deg, #00bfff, #8000ff) !important;
+  background-size: 200% 200% !important;
+  color: white !important;
+  padding: 4px 10px !important;
+  font-size: 0.85rem !important;
+  font-weight: bold !important;
+  border-radius: 16px !important;
+  border: none !important;
+  transition: transform 0.2s ease-in-out !important;
+  
   &:hover {
     transform: scale(1.1);
-    background-color: ${({ theme }) => theme.colors.hover};
+  }
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, #00bfff, #8000ff, #00bfff);
+    background-size: 300% 300%;
+    z-index: -1;
+    animation: gradientMove 4s infinite linear;
+    border-radius: inherit;
+  }
+
+  @keyframes gradientMove {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
   }
 `;
 
@@ -95,15 +144,9 @@ export function Projects() {
     setSelectedProject(null);
   };
 
-  console.log("Projetos carregados:", projects);
-
   return (
     <ProjectsContainer>
       <Typography
-        component={motion.h2}
-        initial={{ opacity: 0, y: -10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
         fontWeight="bold"
         mb={4}
         sx={{
@@ -127,34 +170,34 @@ export function Projects() {
       <Grid container spacing={4} justifyContent="center">
         {projects.map((project, index) => (
           <Grid item key={index}>
-            <motion.div whileHover={{ scale: 1.05 }}>
-              <ProjectCard onClick={() => handleOpen(project)}>
-                {project.coverImage && (
-                  <ProjectImage style={{ backgroundImage: `url(${project.coverImage})` }} />
+            <ProjectCard onClick={() => handleOpen(project)}>
+              <ProjectImage style={{ backgroundImage: `url(${project.coverImage})` }}>
+                <Overlay className="overlay">
+                  <OverlayText className="overlay-text">View Details</OverlayText>
+                </Overlay>
+              </ProjectImage>
+              <Box padding="1.2rem" display="flex" flexDirection="column" alignItems="center">
+                <Typography variant="h6" fontWeight="bold" mb={1} color={theme.colors.textSecondary}>
+                  {project.title}
+                </Typography>
+                <Typography variant="body2" mb={2} color={theme.colors.textLight}>
+                  {project.description}
+                </Typography>
+                {project.technologies && project.technologies.length > 0 && (
+                  <Box display="flex" flexWrap="wrap" justifyContent="center" gap="8px" mt="auto">
+                    {project.technologies.map((tech, i) => (
+                      <TechChip key={i} label={tech} />
+                    ))}
+                  </Box>
                 )}
-                <ProjectInfo>
-                  <Typography variant="h6" fontWeight="bold" mb={1} color={theme.colors.cardBackground}>
-                    {project.title}
-                  </Typography>
-                  <Typography variant="body2" mb={2} color={theme.colors.border}>
-                    {project.description}
-                  </Typography>
+              </Box>
+            </ProjectCard>
 
-                  {project.technologies && project.technologies.length > 0 && (
-                    <TechContainer>
-                      {project.technologies.map((tech, i) => (
-                        <TechChip key={i} label={tech} />
-                      ))}
-                    </TechContainer>
-                  )}
-                </ProjectInfo>
-              </ProjectCard>
-            </motion.div>
           </Grid>
         ))}
       </Grid>
 
-      <ProjectModal open={open} handleClose={handleClose} project={selectedProject} />
+      {open && <ProjectModal open={open} handleClose={handleClose} project={selectedProject} />}
     </ProjectsContainer>
   );
 }
