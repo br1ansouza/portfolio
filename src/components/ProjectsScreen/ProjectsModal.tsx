@@ -179,7 +179,7 @@ const Backdrop = styled(Box)`
   right: 0;
   bottom: 0;
   background: rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(5px); /* Adiciona o efeito de blur */
+  backdrop-filter: blur(5px);
   display: flex;
   justify-content: center;
   align-items: center;
