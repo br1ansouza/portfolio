@@ -20,8 +20,8 @@ export function Sidebar() {
     { section: "projects", pt: "Projetos", en: "Projects", icon: BsFolderFill, route: "/projects" },
     { section: "certificates", pt: "Certificados", en: "Certificates", icon: FaAward, route: "/certificates" },
     { section: "contact", pt: "Contato", en: "Contact", icon: BsEnvelopeFill, route: "/contact" },
-    { section: "github", pt: "GitHub", en: "GitHub", icon: BsGithub, external: "https://github.com/br1ansouza" },
     { section: "resume", pt: "Resumo", en: "Resume", icon: BsPersonFill, route: "/resume" },
+    { section: "github", pt: "GitHub", en: "GitHub", icon: BsGithub, external: "https://github.com/br1ansouza" },
   ];
 
   return (
@@ -90,69 +90,58 @@ export function Sidebar() {
                   </motion.span>
                 </AnimatePresence>
               </ListItemButton>
-
             </ListItem>
           ))}
         </List>
       </Box>
 
-      <Box sx={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
-        <StyledButton onClick={toggleTheme}>
-          {darkMode ? (
-            <>
-              <BsSunFill size={22} />
-              <span>Light Mode</span>
-            </>
-          ) : (
-            <>
-              <BsMoonFill size={22} />
-              <span>Dark Mode</span>
-            </>
-          )}
-        </StyledButton>
+      <Box sx={{ display: "flex", alignItems: "center", gap: "1.5rem", justifyContent: "center", paddingBottom: "1rem" }}>
+  <IconButton
+    onClick={toggleTheme}
+    sx={{
+      color: darkMode ? "#ffcc00" : "#80bfff",
+      padding: "12px",
+      borderRadius: "12px",
+      transition: "0.3s ease-in-out",
+      fontSize: "1.2rem",
+      "&:hover": {
+        transform: "scale(1.1)",
+        boxShadow: "0px 0px 12px rgba(255, 255, 255, 0.2)",
+      },
+    }}
+  >
+    {darkMode ? <BsSunFill size={24} /> : <BsMoonFill size={24} />}
+  </IconButton>
 
-        <StyledButton onClick={() => setLanguage(language === "pt" ? "en" : "pt")}>
-          <AnimatePresence mode="wait">
-            <motion.span
-              key={language}
-              initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: 10 }}
-              transition={{ duration: 0.3 }}
-            >
-              {language === "pt" ? "English" : "Português"}
-            </motion.span>
-          </AnimatePresence>
-        </StyledButton>
-      </Box>
+  <IconButton
+    onClick={() => setLanguage(language === "pt" ? "en" : "pt")}
+    sx={{
+      color: "white",
+      fontSize: "1.2rem",
+      fontWeight: "bold",
+      padding: "12px 16px",
+      borderRadius: "12px",
+      transition: "0.3s ease-in-out",
+      "&:hover": {
+        transform: "scale(1.1)",
+        boxShadow: "0px 0px 12px rgba(255, 255, 255, 0.2)",
+      },
+    }}
+  >
+    <AnimatePresence mode="wait">
+      <motion.span
+        key={language}
+        initial={{ opacity: 0, y: -10 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: 10 }}
+        transition={{ duration: 0.3 }}
+      >
+        {language === "pt" ? "EN" : "PT"}
+      </motion.span>
+    </AnimatePresence>
+  </IconButton>
+</Box>
+
     </Box>
   );
 }
-
-const StyledButton = ({ children, onClick }: { children: React.ReactNode; onClick: () => void }) => {
-  return (
-    <IconButton
-      onClick={onClick}
-      sx={{
-        color: "white",
-        fontSize: "1rem",
-        fontWeight: "bold",
-        width: "100%",
-        padding: "1rem",
-        borderRadius: "10px",
-        backgroundColor: "rgba(255,255,255,0.1)",
-        transition: "0.3s",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        gap: "10px",
-        "&:hover": {
-          backgroundColor: "rgba(255,255,255,0.2)",
-          transform: "scale(1.05)",
-        },
-      }}
-    >
-      {children}
-    </IconButton>
-  );
-};

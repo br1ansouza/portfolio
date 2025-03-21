@@ -1,6 +1,7 @@
-import { Box, Typography, Modal, Chip } from '@mui/material';
+import { Box, Typography, Modal, Chip, Button } from '@mui/material';
 import styled from 'styled-components';
 import { useTheme } from 'styled-components';
+import { FaGithub } from "react-icons/fa";
 
 interface Project {
   title: string;
@@ -9,6 +10,7 @@ interface Project {
   technologies: string[];
   images?: string[];
   keyFeatures?: string[];
+  githubUrl?: string;
 }
 
 interface ProjectModalProps {
@@ -16,6 +18,30 @@ interface ProjectModalProps {
   handleClose: () => void;
   project: Project | null;
 }
+
+const GithubButton = styled(Button)`
+  background-color: #24292e;
+  color: #ffffff;
+  font-size: 1rem;
+  font-weight: bold;
+  padding: 10px 18px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-transform: none;
+  border-radius: 6px;
+  transition: all 0.2s ease-in-out;
+
+  &:hover {
+    background-color: #2f363d;
+  }
+
+  &:active {
+    background-color: #1b1f23;
+    transform: scale(0.98);
+  }
+`;
+
 
 const ModalContent = styled(Box)`
   position: relative;
@@ -221,6 +247,14 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ open, handleClose, project 
                   </StyledFeatureList>
                 </FeatureContainer>
               )}
+              {project.githubUrl && (
+                <Box sx={{ width: "100%", display: "flex", justifyContent: "flex-end", marginTop: "1rem" }}>
+                  <GithubButton onClick={() => window.open(project.githubUrl, "_blank")}>
+                    <FaGithub size={20} />
+                    Ver no GitHub
+                  </GithubButton>
+                </Box>
+              )}
               <CloseButton onClick={handleClose}>&times;</CloseButton>
             </>
           )}
@@ -229,5 +263,6 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ open, handleClose, project 
     </Modal>
   );
 };
+
 
 export default ProjectModal;
