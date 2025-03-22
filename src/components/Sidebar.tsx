@@ -21,7 +21,6 @@ export function Sidebar() {
     { section: "certificates", pt: "Certificados", en: "Certificates", icon: FaAward, route: "/certificates" },
     { section: "contact", pt: "Contato", en: "Contact", icon: BsEnvelopeFill, route: "/contact" },
     { section: "resume", pt: "Resumo", en: "Resume", icon: BsPersonFill, route: "/resume" },
-    { section: "github", pt: "GitHub", en: "GitHub", icon: BsGithub, external: "https://github.com/br1ansouza" },
   ];
 
   return (
@@ -39,7 +38,6 @@ export function Sidebar() {
         flexDirection: "column",
         justifyContent: "space-between",
         boxShadow: "4px 0 15px rgba(0,0,0,0.3)",
-        borderRadius: "0 15px 15px 0",
         zIndex: 100,
       }}
     >
@@ -50,7 +48,6 @@ export function Sidebar() {
               <ListItemButton
                 onClick={() => {
                   if (item.route) navigate(item.route);
-                  else if (item.external) window.open(item.external, "_blank");
                 }}
                 sx={{
                   display: "flex",
@@ -95,53 +92,82 @@ export function Sidebar() {
         </List>
       </Box>
 
-      <Box sx={{ display: "flex", alignItems: "center", gap: "1.5rem", justifyContent: "center", paddingBottom: "1rem" }}>
-  <IconButton
-    onClick={toggleTheme}
-    sx={{
-      color: darkMode ? "#ffcc00" : "#80bfff",
-      padding: "12px",
-      borderRadius: "12px",
-      transition: "0.3s ease-in-out",
-      fontSize: "1.2rem",
-      "&:hover": {
-        transform: "scale(1.1)",
-        boxShadow: "0px 0px 12px rgba(255, 255, 255, 0.2)",
-      },
-    }}
-  >
-    {darkMode ? <BsSunFill size={24} /> : <BsMoonFill size={24} />}
-  </IconButton>
+      <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "1rem", paddingBottom: "1rem" }}>
+        <Box sx={{ width: "100%", display: "flex", justifyContent: "center" }}>
+          <IconButton
+            onClick={() => window.open("https://github.com/br1ansouza", "_blank")}
+            sx={{
+              color: "#fff",
+              padding: "14px",
+              borderRadius: "10px",
+              fontWeight: "bold",
+              fontSize: "1.1rem",
+              width: "100%",
+              maxWidth: "200px",
+              transition: "0.3s ease-in-out",
+              border: "1px solid rgba(255, 255, 255, 0.2)",
+              "&:hover": {
+                backgroundColor: "rgba(255, 255, 255, 0.05)",
+                transform: "scale(1.05)",
+                boxShadow: "0px 0px 10px rgba(255, 255, 255, 0.15)",
+              },
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              gap: "10px",
+            }}
+          >
+            <BsGithub size={22} />
+            GitHub
+          </IconButton>
+        </Box>
 
-  <IconButton
-    onClick={() => setLanguage(language === "pt" ? "en" : "pt")}
-    sx={{
-      color: "white",
-      fontSize: "1.2rem",
-      fontWeight: "bold",
-      padding: "12px 16px",
-      borderRadius: "12px",
-      transition: "0.3s ease-in-out",
-      "&:hover": {
-        transform: "scale(1.1)",
-        boxShadow: "0px 0px 12px rgba(255, 255, 255, 0.2)",
-      },
-    }}
-  >
-    <AnimatePresence mode="wait">
-      <motion.span
-        key={language}
-        initial={{ opacity: 0, y: -10 }}
-        animate={{ opacity: 1, y: 0 }}
-        exit={{ opacity: 0, y: 10 }}
-        transition={{ duration: 0.3 }}
-      >
-        {language === "pt" ? "EN" : "PT"}
-      </motion.span>
-    </AnimatePresence>
-  </IconButton>
-</Box>
+        <Box sx={{ display: "flex", gap: "1rem", justifyContent: "center" }}>
+          <IconButton
+            onClick={toggleTheme}
+            sx={{
+              color: darkMode ? "#ffcc00" : "#80bfff",
+              padding: "10px",
+              borderRadius: "10px",
+              transition: "0.3s ease-in-out",
+              "&:hover": {
+                transform: "scale(1.1)",
+                backgroundColor: "rgba(255, 255, 255, 0.05)",
+              },
+            }}
+          >
+            {darkMode ? <BsSunFill size={24} /> : <BsMoonFill size={24} />}
+          </IconButton>
 
+          <IconButton
+            onClick={() => setLanguage(language === "pt" ? "en" : "pt")}
+            sx={{
+              color: "white",
+              fontSize: "1.1rem",
+              fontWeight: "bold",
+              padding: "10px 16px",
+              borderRadius: "10px",
+              transition: "0.3s ease-in-out",
+              "&:hover": {
+                transform: "scale(1.1)",
+                backgroundColor: "rgba(255, 255, 255, 0.05)",
+              },
+            }}
+          >
+            <AnimatePresence mode="wait">
+              <motion.span
+                key={language}
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 10 }}
+                transition={{ duration: 0.3 }}
+              >
+                {language === "pt" ? "EN" : "PT-BR"}
+              </motion.span>
+            </AnimatePresence>
+          </IconButton>
+        </Box>
+      </Box>
     </Box>
   );
 }
