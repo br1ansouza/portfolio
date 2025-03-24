@@ -15,9 +15,9 @@ const ResumeContainer = styled(Box)`
 `;
 
 const SectionTitle = styled(Typography)`
-  font-weight: bold;
+  font-weight: bold !important;
   margin-bottom: 4rem;
-  font-size: 4rem !important;
+  font-size: 3rem !important;
   font-family: 'Poppins', sans-serif;
   background: linear-gradient(90deg, #ff0080, #00bfff, #ff0080);
   background-size: 200% auto;
@@ -33,39 +33,37 @@ const SectionTitle = styled(Typography)`
 `;
 
 const Subtitle = styled(Typography)`
-  font-size: 1.3rem;
-  color: #fff;
+  font-size: 1.2rem !important;
+  color: ${({ theme }) => theme.colors.textSecondary};
   margin-bottom: 2rem;
 `;
-
-const titleColor = '#b561ed';
 
 const Title = styled(Typography)`
   font-size: 1.5rem !important;
   font-weight: bold !important;
-  color: ${titleColor} !important;
+  color: #b561ed !important;
   margin-bottom: 0.5rem !important;
   position: relative;
-
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3) !important;
 `;
 
 const BodyText = styled(Typography)`
-  font-size: 1rem;
+  font-size: 0.9rem !important;
   color: ${({ theme }) => theme.colors.textSecondary};
 `;
 
 const ResumeCard = styled(Box) <{ height?: string }>`
-  background-color: rgba(71, 68, 68, 0.45);
+  background-color: ${({ theme }) => theme.colors.cardBackground};
   border-radius: 6px;
   padding: 1.5rem;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
   width: 100%;
+  max-width: 100%;
   text-align: left;
-  margin-bottom:
   display: flex;
   flex-direction: column;
   height: ${({ height }) => height || 'auto'};
+  overflow: hidden;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 
   &:hover {
@@ -75,8 +73,8 @@ const ResumeCard = styled(Box) <{ height?: string }>`
 `;
 
 const ListItem = styled(Typography) <{ dotColor: string }>`
-  font-size: 1rem;
-  color: #fff;
+  font-size: 0.9rem !important;
+  color: ${({ theme }) => theme.colors.textPrimary};
   margin-bottom: 0.5rem;
   display: flex;
   align-items: center;
@@ -85,7 +83,7 @@ const ListItem = styled(Typography) <{ dotColor: string }>`
     content: '•';
     color: ${({ dotColor }) => dotColor};
     font-weight: bold;
-    font-size: 1.5rem;
+    font-size: 1.2rem !important;
     margin-right: 8px;
   }
 `;
@@ -93,7 +91,7 @@ const ListItem = styled(Typography) <{ dotColor: string }>`
 const DownloadButton = styled(Button)`
   background: linear-gradient(135deg, #007bff, #0056b3);
   color: #ffffff !important; 
-  font-size: 1rem;
+  font-size: 0.9rem !important;
   font-weight: bold;
   padding: 12px 24px;
   display: flex;
@@ -116,7 +114,6 @@ const DownloadButton = styled(Button)`
   }
 `;
 
-
 export function ResumeSection() {
     return (
         <ResumeContainer>
@@ -126,16 +123,15 @@ export function ResumeSection() {
             <Box width="100%" display="flex" justifyContent="flex-end" sx={{ marginBottom: "15px" }}>
                 <a href="/Profile.pdf" download style={{ textDecoration: 'none' }}>
                     <DownloadButton>
-                        <Download style={{ marginRight: '8px' }} />
+                        <Download style={{ marginRight: '4px' }} />
                         Baixar CV
                     </DownloadButton>
                 </a>
             </Box>
 
-
             <Grid container spacing={3} alignItems="flex-start">
                 <Grid item xs={12} md={6}>
-                    <ResumeCard height="180px">
+                    <ResumeCard style={{ minHeight: '200px', overflowY: 'auto' }}>
                         <Title>Sobre Mim</Title>
                         <BodyText>
                             Sou <strong>Frontend Developer</strong> e entusiasta de <strong>Networking & Cloud</strong>. Apaixonado por tecnologia e inovação,
@@ -146,7 +142,7 @@ export function ResumeSection() {
                 </Grid>
 
                 <Grid item xs={12} md={6}>
-                    <ResumeCard height="230px">
+                    <ResumeCard height="200px">
                         <Title>Habilidades</Title>
                         <ListItem dotColor="green">Desenvolvimento Frontend (React, TypeScript, JavaScript)</ListItem>
                         <ListItem dotColor="green">Arquitetura de Redes</ListItem>
@@ -156,7 +152,7 @@ export function ResumeSection() {
                 </Grid>
 
                 <Grid item xs={12} md={6}>
-                    <ResumeCard height="400px" style={{ marginTop: "-48px" }}>
+                    <ResumeCard height="auto" style={{ minHeight: '290px', overflowY: 'auto' }}>
                         <Title>Experiência</Title>
                         <BodyText fontWeight="bold">Norus - Desenvolvimento Frontend e Redes (Junho de 2023 - Presente)</BodyText>
                         <ListItem dotColor="orange">Desenvolvimento de interfaces modernas e manutenção de aplicações Frontend.</ListItem>
@@ -171,7 +167,7 @@ export function ResumeSection() {
                 </Grid>
 
                 <Grid item xs={12} md={6}>
-                    <ResumeCard height="350px">
+                    <ResumeCard height="auto" style={{ minHeight: '290px', overflowY: 'auto' }}>
                         <Title>Certificações</Title>
                         <ListItem dotColor="purple">Arquitetura de Redes</ListItem>
                         <ListItem dotColor="purple">Proxmox + Hyper-V Server</ListItem>

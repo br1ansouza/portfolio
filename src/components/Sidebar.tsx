@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Box, List, ListItem, ListItemButton, ListItemText, IconButton } from "@mui/material";
 import { useTheme } from "styled-components";
 import { BsSunFill, BsMoonFill, BsGithub, BsPersonFill, BsFolderFill, BsEnvelopeFill, BsHouseFill } from "react-icons/bs";
@@ -6,21 +5,20 @@ import { FaAward } from "react-icons/fa";
 import { useLanguage } from "../contexts/LanguageContext";
 import { motion, AnimatePresence } from "framer-motion";
 import { useNavigate } from "react-router-dom";
+import { useThemeContext } from "../contexts/ThemeContext";
 
 export function Sidebar() {
   const theme = useTheme();
   const { language, setLanguage } = useLanguage();
   const navigate = useNavigate();
-  const [darkMode, setDarkMode] = useState(true);
-
-  const toggleTheme = () => setDarkMode((prevMode) => !prevMode);
+  const { darkMode, toggleTheme } = useThemeContext();
 
   const menuItems = [
     { section: "home", pt: "Início", en: "Home", icon: BsHouseFill, route: "/" },
     { section: "projects", pt: "Projetos", en: "Projects", icon: BsFolderFill, route: "/projects" },
     { section: "certificates", pt: "Certificados", en: "Certificates", icon: FaAward, route: "/certificates" },
-    { section: "contact", pt: "Contato", en: "Contact", icon: BsEnvelopeFill, route: "/contact" },
     { section: "resume", pt: "Resumo", en: "Resume", icon: BsPersonFill, route: "/resume" },
+    { section: "contact", pt: "Contato", en: "Contact", icon: BsEnvelopeFill, route: "/contact" },
   ];
 
   return (
@@ -31,13 +29,13 @@ export function Sidebar() {
         position: "fixed",
         top: 0,
         left: 0,
-        backgroundColor: "rgba(25, 25, 25, 0.9)",
+        backgroundColor: theme.colors.sidebarBackground,
         backdropFilter: "blur(8px)",
         padding: "2rem 1.2rem",
         display: "flex",
         flexDirection: "column",
         justifyContent: "space-between",
-        boxShadow: "4px 0 15px rgba(0,0,0,0.3)",
+        boxShadow: theme.shadow.sidebar,
         zIndex: 100,
       }}
     >
@@ -58,10 +56,10 @@ export function Sidebar() {
                   color: theme.colors.hover,
                   fontWeight: "bold",
                   fontSize: "1.1rem",
-                  backgroundColor: "rgba(255, 255, 255, 0.1)",
+                  backgroundColor: theme.colors.menuItemBackground,
                   transition: "0.3s ease-in-out",
                   "&:hover": {
-                    backgroundColor: "rgba(255, 255, 255, 0.2)",
+                    backgroundColor: theme.colors.hover,
                     transform: "scale(1.08)",
                     boxShadow: "0px 0px 15px rgba(255, 255, 255, 0.2)",
                     color: "white",
@@ -97,7 +95,7 @@ export function Sidebar() {
           <IconButton
             onClick={() => window.open("https://github.com/br1ansouza", "_blank")}
             sx={{
-              color: "#fff",
+              color: theme.colors.textPrimary,
               padding: "14px",
               borderRadius: "10px",
               fontWeight: "bold",
@@ -105,9 +103,9 @@ export function Sidebar() {
               width: "100%",
               maxWidth: "200px",
               transition: "0.3s ease-in-out",
-              border: "1px solid rgba(255, 255, 255, 0.2)",
+              border: `1px solid ${theme.colors.border}`,
               "&:hover": {
-                backgroundColor: "rgba(255, 255, 255, 0.05)",
+                backgroundColor: theme.colors.hover,
                 transform: "scale(1.05)",
                 boxShadow: "0px 0px 10px rgba(255, 255, 255, 0.15)",
               },
@@ -123,26 +121,32 @@ export function Sidebar() {
         </Box>
 
         <Box sx={{ display: "flex", gap: "1rem", justifyContent: "center" }}>
-          <IconButton
-            onClick={toggleTheme}
-            sx={{
-              color: darkMode ? "#ffcc00" : "#80bfff",
-              padding: "10px",
-              borderRadius: "10px",
-              transition: "0.3s ease-in-out",
-              "&:hover": {
-                transform: "scale(1.1)",
-                backgroundColor: "rgba(255, 255, 255, 0.05)",
-              },
-            }}
+          <motion.div
+            whileTap={{ rotate: 360 }}
+            transition={{ duration: 0.6, ease: "easeInOut" }}
           >
-            {darkMode ? <BsSunFill size={24} /> : <BsMoonFill size={24} />}
-          </IconButton>
+            <IconButton
+              onClick={toggleTheme}
+              sx={{
+                color: darkMode ? "#ffcc00" : "#80bfff",
+                padding: "10px",
+                borderRadius: "10px",
+                transition: "0.3s ease-in-out",
+                "&:hover": {
+                  transform: "scale(1.1)",
+                  backgroundColor: theme.colors.hover,
+                },
+              }}
+            >
+              {darkMode ? <BsSunFill size={24} /> : <BsMoonFill size={24} />}
+            </IconButton>
+          </motion.div>
+
 
           <IconButton
             onClick={() => setLanguage(language === "pt" ? "en" : "pt")}
             sx={{
-              color: "white",
+              color: theme.colors.textPrimary,
               fontSize: "1.1rem",
               fontWeight: "bold",
               padding: "10px 16px",
@@ -150,7 +154,7 @@ export function Sidebar() {
               transition: "0.3s ease-in-out",
               "&:hover": {
                 transform: "scale(1.1)",
-                backgroundColor: "rgba(255, 255, 255, 0.05)",
+                backgroundColor: theme.colors.hover,
               },
             }}
           >

@@ -136,8 +136,7 @@ export function ProfileCard() {
                 sx={{
                   padding: "1.5rem",
                   borderRadius: "12px",
-                  backgroundColor: theme.colors.cardBackground,
-                  textAlign: "center",
+                  backgroundColor: theme.colors.cardBackground + " !important",                  textAlign: "center",
                   display: "flex",
                   flexDirection: "column",
                   alignItems: "center",
@@ -159,8 +158,8 @@ export function ProfileCard() {
                   {category.icon}
                 </Box>
 
-                <Typography variant="h6" fontWeight="bold" color={theme.colors.textPrimary}>
-                  {category.title}
+                <Typography variant="h6" fontWeight="bold" sx={{ color: theme.colors.textPrimary }}>
+                {category.title}
                 </Typography>
 
                 <Box sx={{ display: "flex", gap: "8px", flexWrap: "wrap", justifyContent: "center" }}>
@@ -168,7 +167,7 @@ export function ProfileCard() {
                     <Tooltip key={i} title={tech.name} arrow>
                       <motion.div
                         whileHover={{ scale: 1.2, color: tech.color }}
-                        style={{ fontSize: "1.8rem", color: "white" }}
+                        style={{ fontSize: "1.8rem", color: theme.colors.textPrimary }}
                       >
                         {tech.icon}
                       </motion.div>

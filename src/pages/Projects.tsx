@@ -128,6 +128,25 @@ const TechChip = styled(Chip)`
   }
 `;
 
+const StyledTitle = styled(Typography)`
+  font-weight: 900 !important;
+  margin-bottom: 4rem !important;
+  font-size: 3.5rem !important;
+  font-family: 'Montserrat', sans-serif !important;
+  background: linear-gradient(90deg, #ff0080, #00bfff, #ff0080);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradientAnimation 4s linear infinite;
+  transition: transform 0.3s ease;
+
+  @keyframes gradientAnimation {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+`;
+
 export function Projects() {
   const { language } = useLanguage();
   const theme = useTheme();
@@ -146,26 +165,9 @@ export function Projects() {
 
   return (
     <ProjectsContainer>
-      <Typography
-        fontWeight="bold"
-        mb={4}
-        sx={{
-          fontSize: "3rem",
-          fontFamily: "'Poppins', sans-serif",
-          background: "linear-gradient(90deg, #ff0080, #00bfff, #ff0080)",
-          backgroundSize: "200% auto",
-          WebkitBackgroundClip: "text",
-          WebkitTextFillColor: "transparent",
-          animation: "gradientAnimation 4s linear infinite",
-          "@keyframes gradientAnimation": {
-            "0%": { backgroundPosition: "0% 50%" },
-            "50%": { backgroundPosition: "100% 50%" },
-            "100%": { backgroundPosition: "0% 50%" }
-          },
-        }}
-      >
+      <StyledTitle>
         {language === "pt" ? "Projetos em Destaque" : "Featured Projects"} ✨
-      </Typography>
+      </StyledTitle>
 
       <Grid container spacing={4} justifyContent="center">
         {projects.map((project, index) => (

@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
-import { ThemeProvider } from "styled-components";
 import { GlobalStyle } from "./styles/global";
-import { theme } from "./styles/theme";
+import { ThemeProvider as CustomThemeProvider } from "./contexts/ThemeContext";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Home } from "./pages/Home";
 import { CertificatesPage } from "./pages/Certificates";
@@ -21,7 +20,7 @@ function App() {
   }, []);
 
   return (
-    <ThemeProvider theme={theme}>
+    <CustomThemeProvider>
       <GlobalStyle />
       <LanguageProvider>
         {loading ? (
@@ -36,12 +35,12 @@ function App() {
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/projects" element={<Projects />} />
                 <Route path="/resume" element={<ResumeSection />} />
-                </Routes>
+              </Routes>
             </Box>
           </Router>
         )}
       </LanguageProvider>
-    </ThemeProvider>
+    </CustomThemeProvider>
   );
 }
 

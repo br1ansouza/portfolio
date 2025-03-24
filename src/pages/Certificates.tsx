@@ -1,8 +1,28 @@
 import { Box, Typography, Paper, Grid } from "@mui/material";
 import { motion } from "framer-motion";
 import { useTheme } from "styled-components";
+import styled from 'styled-components';
 import { useLanguage } from "../contexts/LanguageContext";
 import { FaCode, FaNetworkWired, FaGitAlt, FaServer, FaDocker } from "react-icons/fa";
+
+const StyledTitle = styled(Typography)`
+  font-weight: 900 !important;
+  margin-bottom: 3rem !important; 
+  font-size: 3.5rem !important;
+  font-family: 'Raleway', sans-serif !important;
+  background: linear-gradient(90deg, #ff0080, #00bfff, #ff0080);
+  background-size: 200% auto !important;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradientAnimation 4s linear infinite;
+  transition: transform 0.3s ease;
+
+  @keyframes gradientAnimation {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+`;
 
 const certificates = [
   {
@@ -81,36 +101,15 @@ export function CertificatesPage() {
           zIndex: 1,
           maxWidth: "1100px",
           margin: "auto",
-          padding: "6rem 1rem",
+          padding: "2rem 1rem",
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
         }}
       >
-        <Typography
-          component={motion.h2}
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          fontWeight="bold"
-          mb={4}
-          sx={{
-            fontSize: "3rem",
-            fontFamily: "'Poppins', sans-serif",
-            background: "linear-gradient(90deg, #ff0080, #00bfff, #ff0080)",
-            backgroundSize: "200% auto",
-            WebkitBackgroundClip: "text",
-            WebkitTextFillColor: "transparent",
-            animation: "gradientAnimation 4s linear infinite",
-            "@keyframes gradientAnimation": {
-              "0%": { backgroundPosition: "0% 50%" },
-              "50%": { backgroundPosition: "100% 50%" },
-              "100%": { backgroundPosition: "0% 50%" },
-            },
-          }}
-        >
+        <StyledTitle>
           {language === "pt" ? "Minhas Certificações" : "My Certification Journey"} ✨
-        </Typography>
+        </StyledTitle>
 
         <Grid container spacing={4} justifyContent="center">
           {certificates.map((cert, index) => (

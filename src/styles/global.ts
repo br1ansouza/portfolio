@@ -7,36 +7,28 @@ export const GlobalStyle = createGlobalStyle`
     box-sizing: border-box;
   }
 
+  html {
+    scroll-behavior: smooth;
+  }
+
   body {
     background-color: ${({ theme }) => theme.colors.background};
     color: ${({ theme }) => theme.colors.textPrimary};
-    font-family: 'Inter', sans-serif;
-    transition: all 0.3s ease-in-out;
-    overflow-x: hidden;
+    font-family: 'Poppins', sans-serif;
+    transition: background-color 0.3s ease, color 0.3s ease;
   }
 
-  h1, h2, h3, h4, h5, h6 {
-    color: ${({ theme }) => theme.colors.textSecondary};
+  a {
+    text-decoration: none;
+    color: inherit;
   }
 
-  a, button {
+  ul {
+    list-style: none;
+  }
+
+  button {
+    font-family: inherit;
     cursor: pointer;
-    transition: all 0.3s ease-in-out;
-  }
-
-  a:hover, button:hover {
-    color: ${({ theme }) => theme.colors.hover};
-  }
-
-  .card {
-    background-color: ${({ theme }) => theme.colors.cardBackground};
-    border-radius: 12px;
-    padding: 16px;
-    transition: 0.3s ease-in-out;
-  }
-
-  .card:hover {
-    background-color: ${({ theme }) => theme.colors.hover};
-    color: ${({ theme }) => theme.colors.background};
   }
 `;
