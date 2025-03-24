@@ -130,7 +130,7 @@ const TechChip = styled(Chip)`
 
 const StyledTitle = styled(Typography)`
   font-weight: 900 !important;
-  margin-bottom: 4rem !important;
+  margin-bottom: 3rem !important;
   font-size: 3.5rem !important;
   font-family: 'Montserrat', sans-serif !important;
   background: linear-gradient(90deg, #ff0080, #00bfff, #ff0080);
