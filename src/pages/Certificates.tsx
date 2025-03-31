@@ -1,5 +1,5 @@
 import { Box, Typography, Paper, Grid } from "@mui/material";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { useTheme } from "styled-components";
 import styled from 'styled-components';
 import { useLanguage } from "../contexts/LanguageContext";
@@ -93,9 +93,9 @@ export function CertificatesPage() {
     <Box sx={{ position: "relative", width: "100%", minHeight: "100vh", overflow: "hidden", backgroundColor: theme.colors.background }}>
       <Box
         component={motion.div}
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
+        initial={{ scale: 0.8, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        transition={{ duration: 0.9, ease: "easeOut" }}
         sx={{
           position: "relative",
           zIndex: 1,
@@ -107,72 +107,91 @@ export function CertificatesPage() {
           alignItems: "center",
         }}
       >
-        <StyledTitle>
-          {language === "pt" ? "Minhas Certificações" : "My Certification Journey"} ✨
-        </StyledTitle>
-
-        <Grid container spacing={4} justifyContent="center">
-          {certificates.map((cert, index) => (
-            <Grid item xs={12} sm={6} md={4} key={index}>
-              <Paper
-                component={motion.div}
-                whileHover={{ scale: 1.05 }}
-                transition={{ duration: 0.2 }}
-                elevation={5}
-                sx={{
-                  height: "230px",
-                  padding: "1.5rem",
-                  borderRadius: "12px",
-                  backgroundColor: theme.colors.cardBackground,
-                  textAlign: "center",
-                  cursor: "pointer",
-                  display: "flex",
-                  flexDirection: "column",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  gap: "10px",
-                  position: "relative",
-                  overflow: "hidden",
-                  boxShadow: "0 4px 12px rgba(0, 0, 0, 0.15)",
-                  transition: "transform 0.3s ease, box-shadow 0.3s ease",
-                  "&:hover": {
-                    transform: "scale(1.05)",
-                    boxShadow: "0 6px 18px rgba(0, 0, 0, 0.3)",
-                  },
-                }}
-                onClick={() => window.open(cert.link, "_blank")}
-              >
-                <Box
-                  sx={{
-                    width: "100%",
-                    height: "6px",
-                    background: cert.color,
-                    position: "absolute",
-                    top: 0,
-                    left: 0,
-                  }}
-                />
-                <Box sx={{ display: "flex", alignItems: "center", gap: "10px", color: theme.colors.textPrimary }}>
-                  <Box sx={{ fontSize: "2rem", color: cert.color }}>{cert.icon}</Box>
-                  <Typography variant="h6" fontWeight="bold">
-                    {cert.name[language as keyof typeof cert.name]}
-                  </Typography>
-                </Box>
-                <Typography variant="body2" color={theme.colors.textSecondary}>
-                  📍 {cert.institution}
-                </Typography>
-                <Typography variant="body2" color={theme.colors.textSecondary}>
-                  📅 {cert.date}
-                </Typography>
-                {["FrontEnd - Módulo 1 - LAB365", "BackEnd - Módulo 2 - LAB365"].includes(cert.name.pt) && (
-                  <Typography variant="body2" fontWeight="bold" color={theme.colors.textPrimary}>
-                    ⭐ {language === "pt" ? "Média Final" : "Final Score"}: {cert.score}
-                  </Typography>
-                )}
-              </Paper>
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={language}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.4 }}
+            style={{
+              width: "100%",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center"
+            }}
+          >
+            <StyledTitle>
+              {language === "pt" ? "Minhas Certificações" : "My Certification Journey"} ✨
+            </StyledTitle>
+            <Grid container spacing={4} justifyContent="center">
+              {certificates.map((cert, index) => (
+                <Grid item xs={12} sm={6} md={4} key={index}>
+                  <motion.div
+                    whileHover={{ scale: 1.05, rotate: 1 }}
+                    initial={{ opacity: 0, y: 40 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: index * 0.1, ease: "easeOut" }}
+                  >
+                    <Paper
+                      elevation={5}
+                      sx={{
+                        height: "230px",
+                        padding: "1.5rem",
+                        borderRadius: "12px",
+                        backgroundColor: theme.colors.cardBackground,
+                        textAlign: "center",
+                        cursor: "pointer",
+                        display: "flex",
+                        flexDirection: "column",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        gap: "10px",
+                        position: "relative",
+                        overflow: "hidden",
+                        boxShadow: "0 4px 12px rgba(0, 0, 0, 0.15)",
+                        transition: "transform 0.3s ease, box-shadow 0.3s ease",
+                        "&:hover": {
+                          transform: "scale(1.05)",
+                          boxShadow: "0 6px 18px rgba(0, 0, 0, 0.3)",
+                        },
+                      }}
+                      onClick={() => window.open(cert.link, "_blank")}
+                    >
+                      <Box
+                        sx={{
+                          width: "100%",
+                          height: "6px",
+                          background: cert.color,
+                          position: "absolute",
+                          top: 0,
+                          left: 0,
+                        }}
+                      />
+                      <Box sx={{ display: "flex", alignItems: "center", gap: "10px", color: theme.colors.textPrimary }}>
+                        <Box sx={{ fontSize: "2rem", color: cert.color }}>{cert.icon}</Box>
+                        <Typography variant="h6" fontWeight="bold">
+                          {cert.name[language as keyof typeof cert.name]}
+                        </Typography>
+                      </Box>
+                      <Typography variant="body2" color={theme.colors.textSecondary}>
+                        📍 {cert.institution}
+                      </Typography>
+                      <Typography variant="body2" color={theme.colors.textSecondary}>
+                        📅 {cert.date}
+                      </Typography>
+                      {["FrontEnd - Módulo 1 - LAB365", "BackEnd - Módulo 2 - LAB365"].includes(cert.name.pt) && (
+                        <Typography variant="body2" fontWeight="bold" color={theme.colors.textPrimary}>
+                          ⭐ {language === "pt" ? "Média Final" : "Final Score"}: {cert.score}
+                        </Typography>
+                      )}
+                    </Paper>
+                  </motion.div>
+                </Grid>
+              ))}
             </Grid>
-          ))}
-        </Grid>
+          </motion.div>
+        </AnimatePresence>
       </Box>
     </Box>
   );

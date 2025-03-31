@@ -2,14 +2,17 @@ import { Box, Typography, Modal, Chip, Button } from '@mui/material';
 import styled from 'styled-components';
 import { useTheme } from 'styled-components';
 import { FaGithub } from "react-icons/fa";
+import { useLanguage } from "../../contexts/LanguageContext";
+
+type Lang = 'pt' | 'en';
 
 interface Project {
-  title: string;
-  description: string;
-  fullDescription?: string;
+  title: { pt: string; en: string };
+  description: { pt: string; en: string };
+  fullDescription?: { pt: string; en: string };
   technologies: string[];
   images?: string[];
-  keyFeatures?: string[];
+  keyFeatures?: { pt: string[]; en: string[] };
   githubUrl?: string;
 }
 
@@ -41,8 +44,6 @@ const GithubButton = styled(Button)`
     transform: scale(0.98);
   }
 `;
-
-
 const ModalContent = styled(Box)`
   position: relative;
   padding: 2rem;
@@ -59,7 +60,6 @@ const ModalContent = styled(Box)`
   text-align: left;
   gap: 1.5rem;
 `;
-
 const ImageContainer = styled(Box)`
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
@@ -81,7 +81,6 @@ const ImageContainer = styled(Box)`
     }
   }
 `;
-
 const TechContainer = styled(Box)`
   display: flex;
   flex-wrap: wrap;
@@ -90,7 +89,6 @@ const TechContainer = styled(Box)`
   padding-top: 1rem;
   width: 100%;
 `;
-
 const StyledChip = styled(Chip)`
   position: relative;
   overflow: hidden;
@@ -129,7 +127,6 @@ const StyledChip = styled(Chip)`
     }
   }
 `;
-
 const Description = styled(Typography)`
   font-size: 1.1rem;
   color: ${({ theme }) => theme.colors.modalTextSecondary};
@@ -137,7 +134,6 @@ const Description = styled(Typography)`
   max-width: 800px;
   text-align: left;
 `;
-
 const FullDescription = styled(Typography)`
   font-size: 1rem;
   color: ${({ theme }) => theme.colors.modalTextSecondary};
@@ -145,21 +141,18 @@ const FullDescription = styled(Typography)`
   max-width: 800px;
   text-align: left;
 `;
-
 const FeatureContainer = styled(Box)`
   width: 100%;
   max-width: 800px;
   text-align: left;
   margin-top: 2rem;
 `;
-
 const FeatureTitle = styled(Typography)`
   font-size: 1.3rem !important;
   font-weight: bold;
   color: ${({ theme }) => theme.colors.modalTextPrimary};
   margin-bottom: 0.8rem !important;
 `;
-
 const StyledFeatureList = styled.ul`
   list-style: none;
   padding-left: 18px;
@@ -181,7 +174,6 @@ const StyledFeatureList = styled.ul`
     }
   }
 `;
-
 const CloseButton = styled.button`
   position: absolute;
   top: 12px;
@@ -197,7 +189,6 @@ const CloseButton = styled.button`
     color: ${({ theme }) => theme.colors.hover};
   }
 `;
-
 const Backdrop = styled(Box)`
   position: fixed;
   top: 0;
@@ -213,56 +204,69 @@ const Backdrop = styled(Box)`
 
 const ProjectModal: React.FC<ProjectModalProps> = ({ open, handleClose, project }) => {
   const theme = useTheme();
+  const { language } = useLanguage();
+  const lang = language as Lang;
+
+  if (!project) return null;
+
+  const title = project.title[lang];
+  const description = project.description[lang];
+  const fullDescription = project.fullDescription?.[lang];
+  const keyFeatures = project.keyFeatures?.[lang] || [];
+  const githubLabel = lang === 'pt' ? 'Ver no GitHub' : 'View on GitHub';
+  const featureTitle = lang === 'pt' ? 'Funcionalidades' : 'Key Features';
 
   return (
     <Modal open={open} onClose={handleClose} closeAfterTransition>
       <Backdrop>
         <ModalContent>
-          {project && (
-            <>
-              <Typography variant="h4" fontWeight="bold" color={theme.colors.modalTextPrimary}>
-                {project.title}
-              </Typography>
-              <Description>{project.description}</Description>
-              {project.images && project.images.length > 0 && (
-                <ImageContainer>
-                  {project.images.map((image, index) => (
-                    <img key={index} src={image} alt={`Project ${project.title} - ${index + 1}`} />
-                  ))}
-                </ImageContainer>
-              )}
-              {project.fullDescription && <FullDescription>{project.fullDescription}</FullDescription>}
-              <TechContainer>
-                {project.technologies.map((tech, index) => (
-                  <StyledChip key={index} label={tech} />
-                ))}
-              </TechContainer>
-              {project.keyFeatures && project.keyFeatures.length > 0 && (
-                <FeatureContainer>
-                  <FeatureTitle>Key Features</FeatureTitle>
-                  <StyledFeatureList>
-                    {project.keyFeatures.map((feature, index) => (
-                      <li key={index}>{feature}</li>
-                    ))}
-                  </StyledFeatureList>
-                </FeatureContainer>
-              )}
-              {project.githubUrl && (
-                <Box sx={{ width: "100%", display: "flex", justifyContent: "flex-end", marginTop: "1rem" }}>
-                  <GithubButton onClick={() => window.open(project.githubUrl, "_blank")}>
-                    <FaGithub size={20} />
-                    Ver no GitHub
-                  </GithubButton>
-                </Box>
-              )}
-              <CloseButton onClick={handleClose}>&times;</CloseButton>
-            </>
+          <Typography variant="h4" fontWeight="bold" color={theme.colors.modalTextPrimary}>
+            {title}
+          </Typography>
+
+          <Description>{description}</Description>
+
+          {Array.isArray(project.images) && project.images.length > 0 && (
+            <ImageContainer>
+              {project.images.map((image: string, index: number) => (
+                <img key={index} src={image} alt={`Project ${title} - ${index + 1}`} />
+              ))}
+            </ImageContainer>
           )}
+
+          {fullDescription && <FullDescription>{fullDescription}</FullDescription>}
+
+          <TechContainer>
+            {project.technologies.map((tech: string, index: number) => (
+              <StyledChip key={index} label={tech} />
+            ))}
+          </TechContainer>
+
+          {keyFeatures.length > 0 && (
+            <FeatureContainer>
+              <FeatureTitle>{featureTitle}</FeatureTitle>
+              <StyledFeatureList>
+                {keyFeatures.map((feature: string, index: number) => (
+                  <li key={index}>{feature}</li>
+                ))}
+              </StyledFeatureList>
+            </FeatureContainer>
+          )}
+
+          {project.githubUrl && (
+            <Box sx={{ width: "100%", display: "flex", justifyContent: "flex-end", marginTop: "1rem" }}>
+              <GithubButton onClick={() => window.open(project.githubUrl, "_blank")}>
+                <FaGithub size={20} />
+                {githubLabel}
+              </GithubButton>
+            </Box>
+          )}
+
+          <CloseButton onClick={handleClose}>&times;</CloseButton>
         </ModalContent>
       </Backdrop>
     </Modal>
   );
 };
-
 
 export default ProjectModal;

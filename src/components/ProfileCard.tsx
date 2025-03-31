@@ -136,7 +136,8 @@ export function ProfileCard() {
                 sx={{
                   padding: "1.5rem",
                   borderRadius: "12px",
-                  backgroundColor: theme.colors.cardBackground + " !important",                  textAlign: "center",
+                  backgroundColor: theme.colors.cardBackground + " !important",
+                  textAlign: "center",
                   display: "flex",
                   flexDirection: "column",
                   alignItems: "center",

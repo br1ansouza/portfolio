@@ -166,7 +166,7 @@ export function Sidebar() {
                 exit={{ opacity: 0, y: 10 }}
                 transition={{ duration: 0.3 }}
               >
-                {language === "pt" ? "EN" : "PT-BR"}
+                {language === "pt" ? "EN" : "PTBR"}
               </motion.span>
             </AnimatePresence>
           </IconButton>

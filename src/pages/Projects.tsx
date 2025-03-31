@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import { projects } from '../components/ProjectsScreen/ProjectsCard';
 import { useLanguage } from '../contexts/LanguageContext';
 import ProjectModal from '../components/ProjectsScreen/ProjectsModal';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const ProjectsContainer = styled(Box)`
   position: relative;
@@ -22,7 +23,7 @@ const ProjectCard = styled(Box)`
   position: relative;
   overflow: hidden;
   width: 330px;
-  height: 500px;
+  height: 550px;
   border-radius: 12px;
   cursor: pointer;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -49,7 +50,7 @@ const ProjectCard = styled(Box)`
 
 const ProjectImage = styled(Box)`
   width: 100%;
-  height: 220px;
+  height: 250px;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -149,7 +150,9 @@ const StyledTitle = styled(Typography)`
 
 export function Projects() {
   const { language } = useLanguage();
+  const lang = language as 'pt' | 'en';
   const theme = useTheme();
+
   const [open, setOpen] = useState(false);
   const [selectedProject, setSelectedProject] = useState<typeof projects[0] | null>(null);
 
@@ -163,41 +166,70 @@ export function Projects() {
     setSelectedProject(null);
   };
 
+  const sectionTitle = lang === "pt" ? "Projetos em Destaque" : "Featured Projects";
+  const viewDetails = lang === "pt" ? "Ver Detalhes" : "View Details";
+
   return (
     <ProjectsContainer>
-      <StyledTitle>
-        {language === "pt" ? "Projetos em Destaque" : "Featured Projects"} ✨
-      </StyledTitle>
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={language}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -20 }}
+          transition={{ duration: 0.4 }}
+          style={{
+            width: "100%",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center"
+          }}
+        >
+          <StyledTitle>{sectionTitle} ✨</StyledTitle>
 
-      <Grid container spacing={4} justifyContent="center">
-        {projects.map((project, index) => (
-          <Grid item key={index}>
-            <ProjectCard onClick={() => handleOpen(project)}>
-              <ProjectImage style={{ backgroundImage: `url(${project.coverImage})` }}>
-                <Overlay className="overlay">
-                  <OverlayText className="overlay-text">View Details</OverlayText>
-                </Overlay>
-              </ProjectImage>
-              <Box padding="1.2rem" display="flex" flexDirection="column" alignItems="center">
-                <Typography variant="h6" fontWeight="bold" mb={1} color={theme.colors.textSecondary}>
-                  {project.title}
-                </Typography>
-                <Typography variant="body2" mb={2} color={theme.colors.textLight}>
-                  {project.description}
-                </Typography>
-                {project.technologies && project.technologies.length > 0 && (
-                  <Box display="flex" flexWrap="wrap" justifyContent="center" gap="8px" mt="auto">
-                    {project.technologies.map((tech, i) => (
-                      <TechChip key={i} label={tech} />
-                    ))}
-                  </Box>
-                )}
-              </Box>
-            </ProjectCard>
+          <Grid container spacing={4} justifyContent="center">
+            {projects.map((project, index) => {
+              const title = project.title[lang];
+              const description = project.description[lang];
 
+              return (
+                <Grid item key={index}>
+                  <motion.div
+                    whileHover={{ scale: 1.05 }}
+                    initial={{ opacity: 0, y: 40 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: index * 0.1, ease: "easeOut" }}
+                  >
+                    <ProjectCard onClick={() => handleOpen(project)}>
+                      <ProjectImage style={{ backgroundImage: `url(${project.coverImage})` }}>
+                        <Overlay className="overlay">
+                          <OverlayText className="overlay-text">{viewDetails}</OverlayText>
+                        </Overlay>
+                      </ProjectImage>
+
+                      <Box padding="1.2rem" display="flex" flexDirection="column" alignItems="center">
+                        <Typography variant="h6" fontWeight="bold" mb={1} color={theme.colors.textSecondary}>
+                          {title}
+                        </Typography>
+                        <Typography variant="body2" mb={2} color={theme.colors.textLight}>
+                          {description}
+                        </Typography>
+                        {project.technologies?.length > 0 && (
+                          <Box display="flex" flexWrap="wrap" justifyContent="center" gap="8px" mt="auto">
+                            {project.technologies.map((tech, i) => (
+                              <TechChip key={i} label={tech} />
+                            ))}
+                          </Box>
+                        )}
+                      </Box>
+                    </ProjectCard>
+                  </motion.div>
+                </Grid>
+              );
+            })}
           </Grid>
-        ))}
-      </Grid>
+        </motion.div>
+      </AnimatePresence>
 
       {open && <ProjectModal open={open} handleClose={handleClose} project={selectedProject} />}
     </ProjectsContainer>
