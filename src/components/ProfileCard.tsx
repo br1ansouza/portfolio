@@ -1,5 +1,5 @@
 import { Box, Typography, Avatar, Grid, Paper, Tooltip } from "@mui/material";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
 import { useTheme } from "styled-components";
 import { useLanguage } from "../contexts/useLanguage";
@@ -61,131 +61,142 @@ export function ProfileCard() {
   ];
 
   return (
-    <Box
-      sx={{
-        display: "flex",
-        flexDirection: { xs: "column", md: "row" },
-        alignItems: "center",
-        justifyContent: "space-between",
-        textAlign: "left",
-        maxWidth: "1100px",
-        width: "100%",
-        margin: "0 auto",
-      }}
-    >
+    <AnimatePresence mode="wait">
       <motion.div
-        animate={{ rotate: 360 }}
-        transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
-        style={{ position: "relative", display: "inline-block" }}
+        key={language}
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: -20 }}
+        transition={{ duration: 0.4 }}
       >
         <Box
           sx={{
-            position: "relative",
-            display: "inline-block",
-            borderRadius: "50%",
-            padding: "6px",
-            background: "linear-gradient(135deg, #6C1EE9, #F321E2)",
-            boxShadow: "0px 0px 35px 8px rgba(108, 30, 233, 0.6)",
+            display: "flex",
+            flexDirection: { xs: "column", md: "row" },
+            alignItems: "center",
+            justifyContent: "space-between",
+            textAlign: "left",
+            maxWidth: "1100px",
+            width: "100%",
+            margin: "0 auto",
           }}
         >
-          <Avatar
-            src={profileImage}
-            sx={{
-              width: 180,
-              height: 180,
-              filter: isHovered ? "brightness(1.2)" : "none",
-            }}
-            onMouseEnter={() => setIsHovered(true)}
-            onMouseLeave={() => setIsHovered(false)}
-          />
-        </Box>
-      </motion.div>
-
-      <Box sx={{ flex: 1, paddingLeft: { md: "3rem" }, maxWidth: "850px" }}>
-        <Typography
-          component={motion.h3}
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          fontWeight="bold"
-          mb={2}
-          sx={{
-            fontSize: "3rem",
-            fontFamily: "'Poppins', sans-serif",
-            background: "linear-gradient(90deg, #ff0080, #00bfff, #ff0080)",
-            backgroundSize: "200% auto",
-            WebkitBackgroundClip: "text",
-            WebkitTextFillColor: "transparent",
-            animation: "gradientAnimation 4s linear infinite",
-            "@keyframes gradientAnimation": {
-              "0%": { backgroundPosition: "0% 50%" },
-              "50%": { backgroundPosition: "100% 50%" },
-              "100%": { backgroundPosition: "0% 50%" }
-            },
-          }}
-        >
-          {aboutTitle}
-        </Typography>
-
-        <Typography variant="body1" sx={{ color: theme.colors.textSecondary, lineHeight: "1.8", fontSize: "1.1rem" }}>
-          {aboutText}
-        </Typography>
-
-        <Grid container spacing={2} justifyContent="flex-start" sx={{ mt: 3 }}>
-          {categories.map((category, index) => (
-            <Grid item xs={12} sm={6} md={4} key={index}>
-              <Paper
-                component={motion.div}
-                whileHover={{ scale: 1.05 }}
-                transition={{ duration: 0.3 }}
-                elevation={6}
+          <motion.div
+            animate={{ rotate: 360 }}
+            transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+            style={{ position: "relative", display: "inline-block" }}
+          >
+            <Box
+              sx={{
+                position: "relative",
+                display: "inline-block",
+                borderRadius: "50%",
+                padding: "6px",
+                background: "linear-gradient(135deg, #6C1EE9, #F321E2)",
+                boxShadow: "0px 0px 35px 8px rgba(108, 30, 233, 0.6)",
+              }}
+            >
+              <Avatar
+                src={profileImage}
                 sx={{
-                  padding: "1.5rem",
-                  borderRadius: "12px",
-                  backgroundColor: theme.colors.cardBackground + " !important",
-                  textAlign: "center",
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "center",
-                  height: "230px",
-                  gap: "10px",
-                  borderLeft: `5px solid ${theme.colors.hover}`,
+                  width: 180,
+                  height: 180,
+                  filter: isHovered ? "brightness(1.2)" : "none",
                 }}
-              >
-                <Box
-                  sx={{
-                    fontSize: "2rem",
-                    color: category.color,
-                    transition: "0.3s",
-                    "&:hover": {
-                      filter: "brightness(1.5)",
-                    },
-                  }}
-                >
-                  {category.icon}
-                </Box>
+                onMouseEnter={() => setIsHovered(true)}
+                onMouseLeave={() => setIsHovered(false)}
+              />
+            </Box>
+          </motion.div>
 
-                <Typography variant="h6" fontWeight="bold" sx={{ color: theme.colors.textPrimary }}>
-                  {category.title}
-                </Typography>
+          <Box sx={{ flex: 1, paddingLeft: { md: "3rem" }, maxWidth: "850px" }}>
+            <Typography
+              component={motion.h3}
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              fontWeight="bold"
+              mb={2}
+              sx={{
+                fontSize: "3rem",
+                marginTop: "4rem !important",
+                fontFamily: "'Poppins', sans-serif",
+                background: "linear-gradient(90deg, #ff0080, #00bfff, #ff0080)",
+                backgroundSize: "200% auto",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                animation: "gradientAnimation 4s linear infinite",
+                "@keyframes gradientAnimation": {
+                  "0%": { backgroundPosition: "0% 50%" },
+                  "50%": { backgroundPosition: "100% 50%" },
+                  "100%": { backgroundPosition: "0% 50%" }
+                },
+              }}
+            >
+              {aboutTitle}
+            </Typography>
 
-                <Box sx={{ display: "flex", gap: "8px", flexWrap: "wrap", justifyContent: "center" }}>
-                  {category.techIcons.map((tech, i) => (
-                    <Tooltip key={i} title={tech.name} arrow>
-                      <motion.div
-                        whileHover={{ scale: 1.2, color: tech.color }}
-                        style={{ fontSize: "1.8rem", color: theme.colors.textPrimary }}
-                      >
-                        {tech.icon}
-                      </motion.div>
-                    </Tooltip>
-                  ))}
-                </Box>
-              </Paper>
+            <Typography variant="body1" sx={{ color: theme.colors.textSecondary, lineHeight: "1.8", fontSize: "1.1rem" }}>
+              {aboutText}
+            </Typography>
+
+            <Grid container spacing={2} justifyContent="flex-start" sx={{ mt: 3 }}>
+              {categories.map((category, index) => (
+                <Grid item xs={12} sm={6} md={4} key={index}>
+                  <Paper
+                    component={motion.div}
+                    whileHover={{ scale: 1.05 }}
+                    transition={{ duration: 0.3 }}
+                    elevation={6}
+                    sx={{
+                      padding: "1.5rem",
+                      borderRadius: "12px",
+                      backgroundColor: theme.colors.cardBackground + " !important",
+                      textAlign: "center",
+                      display: "flex",
+                      flexDirection: "column",
+                      alignItems: "center",
+                      height: "230px",
+                      gap: "10px",
+                      borderLeft: `5px solid ${theme.colors.hover}`,
+                    }}
+                  >
+                    <Box
+                      sx={{
+                        fontSize: "2rem",
+                        color: category.color,
+                        transition: "0.3s",
+                        "&:hover": {
+                          filter: "brightness(1.5)",
+                        },
+                      }}
+                    >
+                      {category.icon}
+                    </Box>
+
+                    <Typography variant="h6" fontWeight="bold" sx={{ color: theme.colors.textPrimary }}>
+                      {category.title}
+                    </Typography>
+
+                    <Box sx={{ display: "flex", gap: "8px", flexWrap: "wrap", justifyContent: "center" }}>
+                      {category.techIcons.map((tech, i) => (
+                        <Tooltip key={i} title={tech.name} arrow>
+                          <motion.div
+                            whileHover={{ scale: 1.2, color: tech.color }}
+                            style={{ fontSize: "1.8rem", color: theme.colors.textPrimary }}
+                          >
+                            {tech.icon}
+                          </motion.div>
+                        </Tooltip>
+                      ))}
+                    </Box>
+                  </Paper>
+                </Grid>
+              ))}
             </Grid>
-          ))}
-        </Grid>
-      </Box>
-    </Box>
-  );
+          </Box>
+        </Box>
+        </motion.div>
+        </AnimatePresence>
+        );
 }
