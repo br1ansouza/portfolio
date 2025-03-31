@@ -9,11 +9,11 @@ export const projects = [
       en: "An API built with Node.js, TypeScript, and TypeORM to manage branches, products, and transfers between units.",
     },
     fullDescription: {
-      pt: "Este projeto é uma API RESTful desenvolvida com Node.js, TypeScript e TypeORM, utilizando PostgreSQL como banco de dados. A API oferece funcionalidades para cadastro e autenticação de usuários, gerenciamento de produtos e controle de movimentações entre filiais. A autenticação é realizada via JWT e a segurança das senhas é garantida com Bcrypt. A documentação da API é feita com Swagger, facilitando a integração e uso por outros desenvolvedores.",
-      en: "This is a RESTful API developed with Node.js, TypeScript, and TypeORM, using PostgreSQL as the database. It provides user registration and authentication, product management, and control of transfers between branches. Authentication is handled via JWT, with password security ensured using Bcrypt. API documentation is provided via Swagger for easy integration.",
+      pt: "Este projeto é uma API RESTful desenvolvida com Node.js, TypeScript e TypeORM, utilizando PostgreSQL como banco de dados...",
+      en: "This is a RESTful API developed with Node.js, TypeScript, and TypeORM, using PostgreSQL as the database...",
     },
     technologies: ["Node.js", "Express", "TypeScript", "TypeORM", "PostgreSQL", "Bcrypt"],
-    coverImage: "src/assets/projects-images/api-gestao-filiais-produtos/logo-api-gestao.webp",
+    coverImage: "../assets/projects-images/api-gestao-filiais-produtos/logo-api-gestao.png",
     images: [],
     keyFeatures: {
       pt: [
@@ -41,19 +41,19 @@ export const projects = [
       en: "Pharmacy App",
     },
     description: {
-      pt: "Um aplicativo mobile desenvolvido com React Native e Expo, criado para gerenciar o estoque, usuários e movimentações de uma farmácia fictícia.",
-      en: "A mobile app built with React Native and Expo to manage stock, users, and movements of a fictional pharmacy.",
+      pt: "Um aplicativo mobile desenvolvido com React Native e Expo...",
+      en: "A mobile app built with React Native and Expo...",
     },
     fullDescription: {
-      pt: "Este projeto foi desenvolvido utilizando React Native e Expo, permitindo a gestão eficiente do estoque de uma farmácia fictícia. A aplicação inclui funcionalidades como autenticação de usuários, controle de movimentações de produtos e gerenciamento de diferentes níveis de acesso. Além disso, integrações com banco de dados facilitam a atualização em tempo real.",
-      en: "This project was developed using React Native and Expo, allowing efficient stock management for a fictional pharmacy. It includes user authentication, product movement tracking, and access-level management. Database integration enables real-time updates.",
+      pt: "Este projeto foi desenvolvido utilizando React Native e Expo...",
+      en: "This project was developed using React Native and Expo...",
     },
     technologies: ["JavaScript", "TypeScript", "React Native", "Expo"],
-    coverImage: "/src/assets/projects-images/app-farmacia/tela-logo-farmacia.webp",
+    coverImage: "../assets/projects-images/app-farmacia/tela-logo-farmacia.png",
     images: [
-      "/src/assets/projects-images/app-farmacia/tela_home.png",
-      "/src/assets/projects-images/app-farmacia/tela_users.png",
-      "/src/assets/projects-images/app-farmacia/tela_movimentacoes.png"
+      "../assets/projects-images/app-farmacia/tela_home.png",
+      "../assets/projects-images/app-farmacia/tela_users.png",
+      "../assets/projects-images/app-farmacia/tela_movimentacoes.png"
     ],
     keyFeatures: {
       pt: ["Autenticação", "Gestão de Estoque", "Gestão de Usuários", "Gestão de Movimentações"],
@@ -67,19 +67,19 @@ export const projects = [
       en: "WebCarros",
     },
     description: {
-      pt: "Um aplicativo React Native que permite aos usuários compartilhar opiniões sobre automóveis e navegar por produtos de forma simples e intuitiva.",
-      en: "A React Native app that allows users to share car reviews and browse automotive products with ease.",
+      pt: "Um aplicativo React Native que permite aos usuários compartilhar opiniões sobre automóveis...",
+      en: "A React Native app that allows users to share car reviews...",
     },
     fullDescription: {
-      pt: "O WebCarros é um aplicativo desenvolvido em React Native que permite aos usuários fazer login, visualizar produtos relacionados a automóveis, e compartilhar suas avaliações. O objetivo é facilitar a troca de informações e opiniões sobre diferentes veículos.",
-      en: "WebCarros is a React Native app that allows users to log in, view automotive-related products, and share their reviews. It aims to facilitate the exchange of information and opinions about different vehicles.",
+      pt: "O WebCarros é um aplicativo desenvolvido em React Native...",
+      en: "WebCarros is a React Native app that allows users to log in...",
     },
     technologies: ["TypeScript", "React Native", "Expo"],
-    coverImage: "src/assets/projects-images/app-webcarros/tela-logo-webcarros.webp",
+    coverImage: "../assets/projects-images/app-webcarros/tela-logo-webcarros.png",
     images: [
-      "src/assets/projects-images/app-webcarros/tela-login-webcarros.png",
-      "src/assets/projects-images/app-webcarros/tela-veiculos-webcarros.png",
-      "src/assets/projects-images/app-webcarros/tela-avaliacao-webcarros.png"
+      "../assets/projects-images/app-webcarros/tela-login-webcarros.png",
+      "../assets/projects-images/app-webcarros/tela-veiculos-webcarros.png",
+      "../assets/projects-images/app-webcarros/tela-avaliacao-webcarros.png"
     ],
     keyFeatures: {
       pt: ["Catálogo de produtos", "Avaliações de usuários", "Autenticação"],
@@ -93,19 +93,19 @@ export const projects = [
       en: "E-commerce Platform",
     },
     description: {
-      pt: "Aplicativo React Native que exibe uma lista de produtos com funcionalidade de pesquisa e rolagem infinita para carregar mais itens.",
-      en: "React Native app that displays a product list with search functionality and infinite scroll to load more items.",
+      pt: "Aplicativo React Native que exibe uma lista de produtos com funcionalidade de pesquisa...",
+      en: "React Native app that displays a product list with search functionality...",
     },
     fullDescription: {
-      pt: "Bem-vindo ao Product Page app Ecommerce! Este é um aplicativo React Native que exibe uma lista de produtos com funcionalidade de pesquisa e rolagem infinita para carregar mais itens. Os usuários podem adicionar produtos ao carrinho e navegar facilmente pela interface. Além disso, o aplicativo possui uma aba de login funcional.",
-      en: "Welcome to the Product Page Ecommerce App! This is a React Native app that showcases a product list with search functionality and infinite scroll. Users can add products to the cart and navigate through the interface smoothly. It also features a working login tab.",
+      pt: "Bem-vindo ao Product Page app Ecommerce! Este é um aplicativo React Native...",
+      en: "Welcome to the Product Page Ecommerce App! This is a React Native app...",
     },
     technologies: ["JavaScript", "React Native", "Expo"],
-    coverImage: "src/assets/projects-images/app-ecommerce/tela-logo-ecommerce.webp",
+    coverImage: "../assets/projects-images/app-ecommerce/tela-logo-ecommerce.png",
     images: [
-      "src/assets/projects-images/app-ecommerce/tela-login.png",
-      "src/assets/projects-images/app-ecommerce/tela-produtos.png",
-      "src/assets/projects-images/app-ecommerce/carrinho-de-compras.png"
+      "../assets/projects-images/app-ecommerce/tela-login.png",
+      "../assets/projects-images/app-ecommerce/tela-produtos.png",
+      "../assets/projects-images/app-ecommerce/carrinho-de-compras.png"
     ],
     keyFeatures: {
       pt: ["Catálogo de produtos", "Carrinho de compras", "Integração de pagamento"],
@@ -119,15 +119,15 @@ export const projects = [
       en: "RPG Combat Simulator",
     },
     description: {
-      pt: "Projeto que demonstra como utilizar conceitos avançados de POO em TypeScript com uma simulação de combate.",
-      en: "Project demonstrating advanced OOP concepts in TypeScript through an interactive combat simulation.",
+      pt: "Projeto que demonstra como utilizar conceitos avançados de POO em TypeScript...",
+      en: "Project demonstrating advanced OOP concepts in TypeScript...",
     },
     fullDescription: {
-      pt: "Este projeto é um jogo de RPG simplificado desenvolvido em TypeScript. Ele explora conceitos de programação orientada a objetos (POO), como herança, encapsulamento e polimorfismo, para criar interações entre personagens, inimigos e um chefe desafiador.",
-      en: "This is a simplified RPG game built in TypeScript. It explores object-oriented programming (OOP) concepts such as inheritance, encapsulation, and polymorphism to create interactions between characters, enemies, and a challenging boss.",
+      pt: "Este projeto é um jogo de RPG simplificado desenvolvido em TypeScript...",
+      en: "This is a simplified RPG game built in TypeScript...",
     },
     technologies: ["TypeScript"],
-    coverImage: "src/assets/projects-images/app-rpg/logo-rpg.webp",
+    coverImage: "../assets/projects-images/app-rpg/logo-rpg.png",
     images: [],
     keyFeatures: {
       pt: ["POO", "Encapsulamento", "Herança", "Polimorfismo"],
