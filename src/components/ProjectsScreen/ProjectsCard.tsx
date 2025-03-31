@@ -1,3 +1,5 @@
+import { farmacia, webcarros, ecommerce, api_gestao, rpg } from "../../data/images";
+
 export const projects = [
   {
     title: {
@@ -13,7 +15,7 @@ export const projects = [
       en: "This is a RESTful API developed with Node.js, TypeScript, and TypeORM, using PostgreSQL as the database...",
     },
     technologies: ["Node.js", "Express", "TypeScript", "TypeORM", "PostgreSQL", "Bcrypt"],
-    coverImage: "../assets/projects-images/api-gestao-filiais-produtos/logo-api-gestao.png",
+    coverImage: api_gestao.logo_api_gestao,
     images: [],
     keyFeatures: {
       pt: [
@@ -49,11 +51,11 @@ export const projects = [
       en: "This project was developed using React Native and Expo...",
     },
     technologies: ["JavaScript", "TypeScript", "React Native", "Expo"],
-    coverImage: "../assets/projects-images/app-farmacia/tela-logo-farmacia.png",
+    coverImage: farmacia.tela_logo_farmacia,
     images: [
-      "../assets/projects-images/app-farmacia/tela_home.png",
-      "../assets/projects-images/app-farmacia/tela_users.png",
-      "../assets/projects-images/app-farmacia/tela_movimentacoes.png"
+      farmacia.tela_home,
+      farmacia.tela_users,
+      farmacia.tela_movimentacoes
     ],
     keyFeatures: {
       pt: ["Autenticação", "Gestão de Estoque", "Gestão de Usuários", "Gestão de Movimentações"],
@@ -75,11 +77,11 @@ export const projects = [
       en: "WebCarros is a React Native app that allows users to log in...",
     },
     technologies: ["TypeScript", "React Native", "Expo"],
-    coverImage: "../assets/projects-images/app-webcarros/tela-logo-webcarros.png",
+    coverImage: webcarros.tela_logo_webcarros,
     images: [
-      "../assets/projects-images/app-webcarros/tela-login-webcarros.png",
-      "../assets/projects-images/app-webcarros/tela-veiculos-webcarros.png",
-      "../assets/projects-images/app-webcarros/tela-avaliacao-webcarros.png"
+      webcarros.tela_login_webcarros,
+      webcarros.tela_veiculos_webcarros,
+      webcarros.tela_avaliacao_webcarros
     ],
     keyFeatures: {
       pt: ["Catálogo de produtos", "Avaliações de usuários", "Autenticação"],
@@ -101,11 +103,11 @@ export const projects = [
       en: "Welcome to the Product Page Ecommerce App! This is a React Native app...",
     },
     technologies: ["JavaScript", "React Native", "Expo"],
-    coverImage: "../assets/projects-images/app-ecommerce/tela-logo-ecommerce.png",
+    coverImage: ecommerce.tela_logo_ecommerce,
     images: [
-      "../assets/projects-images/app-ecommerce/tela-login.png",
-      "../assets/projects-images/app-ecommerce/tela-produtos.png",
-      "../assets/projects-images/app-ecommerce/carrinho-de-compras.png"
+      ecommerce.tela_login_ecommerce,
+      ecommerce.tela_produtos,
+      ecommerce.carrinho_de_compras
     ],
     keyFeatures: {
       pt: ["Catálogo de produtos", "Carrinho de compras", "Integração de pagamento"],
@@ -127,7 +129,7 @@ export const projects = [
       en: "This is a simplified RPG game built in TypeScript...",
     },
     technologies: ["TypeScript"],
-    coverImage: "../assets/projects-images/app-rpg/logo-rpg.png",
+    coverImage: rpg.logo_rpg,
     images: [],
     keyFeatures: {
       pt: ["POO", "Encapsulamento", "Herança", "Polimorfismo"],
