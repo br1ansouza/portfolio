@@ -1,5 +1,6 @@
 import { Box, Typography, Avatar, Grid, Paper, Tooltip } from "@mui/material";
 import { motion } from "framer-motion";
+import { useState } from "react";
 import { useTheme } from "styled-components";
 import { useLanguage } from "../contexts/LanguageContext";
 import profileImage from "../assets/profile-images/profile-image.jpg";
@@ -10,6 +11,8 @@ import { SiJavascript, SiTypescript, SiMui, SiPostgresql, SiMariadb, SiPostman }
 export function ProfileCard() {
   const theme = useTheme();
   const { language } = useLanguage();
+
+  const [isHovered, setIsHovered] = useState(false);
 
   const aboutTitle = language === "pt" ? "Sobre Mim" : "About Me";
   const aboutText =
@@ -90,7 +93,10 @@ export function ProfileCard() {
             sx={{
               width: 180,
               height: 180,
+              filter: isHovered ? "brightness(1.2)" : "none",
             }}
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
           />
         </Box>
       </motion.div>
@@ -160,7 +166,7 @@ export function ProfileCard() {
                 </Box>
 
                 <Typography variant="h6" fontWeight="bold" sx={{ color: theme.colors.textPrimary }}>
-                {category.title}
+                  {category.title}
                 </Typography>
 
                 <Box sx={{ display: "flex", gap: "8px", flexWrap: "wrap", justifyContent: "center" }}>

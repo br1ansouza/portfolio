@@ -1,6 +1,8 @@
 import { Box, Typography, Grid, Button } from '@mui/material';
 import { Download } from '@mui/icons-material';
 import styled from 'styled-components';
+import { motion, AnimatePresence } from "framer-motion";
+import { useLanguage } from "../contexts/LanguageContext";
 
 const ResumeContainer = styled(Box)`
   position: relative;
@@ -15,12 +17,11 @@ const ResumeContainer = styled(Box)`
 `;
 
 const SectionTitle = styled(Typography)`
-  font-weight: bold !important;
-  margin-bottom: 4rem;
-  font-size: 3rem !important;
-  font-family: 'Poppins', sans-serif;
+  font-weight: 900 !important;
+  font-size: 3.5rem !important;
+  font-family: 'Raleway', sans-serif !important;
   background: linear-gradient(90deg, #ff0080, #00bfff, #ff0080);
-  background-size: 200% auto;
+  background-size: 200% auto !important;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   animation: gradientAnimation 4s linear infinite;
@@ -115,103 +116,157 @@ const DownloadButton = styled(Button)`
 `;
 
 export function ResumeSection() {
+    const { language } = useLanguage();
+    const lang = language as "pt" | "en";
+  
+    const sectionTitle = lang === "pt" ? "Resumo Profissional" : "Professional Summary";
+    const subtitle = lang === "pt"
+      ? "Desenvolvedor com experiência em criação de interfaces modernas e soluções web"
+      : "Developer with experience in building modern interfaces and web solutions";
+  
+    const aboutTitle = lang === "pt" ? "Sobre Mim" : "About Me";
+    const aboutText = lang === "pt"
+      ? `Sou Frontend Developer e entusiasta de Networking & Cloud. Apaixonado por tecnologia e inovação,
+         com experiência em desenvolvimento web e infraestrutura de redes. Atuo na configuração de equipamentos de rede
+         e servidores Linux e Windows.`
+      : `I am a Frontend Developer and Networking & Cloud enthusiast. Passionate about technology and innovation,
+         with experience in web development and network infrastructure. I work with configuring network devices
+         and Linux and Windows servers.`;
+  
+    const skillsTitle = lang === "pt" ? "Habilidades" : "Skills";
+    const skillsList = lang === "pt"
+      ? ["Desenvolvimento Frontend (React, TypeScript, JavaScript)", "Arquitetura de Redes", "Azure DevOps", "PostgreSQL"]
+      : ["Frontend Development (React, TypeScript, JavaScript)", "Network Architecture", "Azure DevOps", "PostgreSQL"];
+  
+    const experienceTitle = lang === "pt" ? "Experiência" : "Experience";
+    const certificationsTitle = lang === "pt" ? "Certificações" : "Certifications";
+    const educationTitle = lang === "pt" ? "Formação Acadêmica" : "Academic Background";
+    const downloadText = lang === "pt" ? "Baixar CV" : "Download Resume";
+  
     return (
-        <ResumeContainer>
-            <SectionTitle>Resumo Profissional</SectionTitle>
-            <Subtitle>Desenvolvedor com experiência em criação de interfaces modernas e soluções web</Subtitle>
-
+      <ResumeContainer>
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={language}
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.5 }}
+            style={{ width: "100%" }}
+          >
+            <SectionTitle>{sectionTitle}</SectionTitle>
+            <Subtitle>{subtitle}</Subtitle>
+  
             <Box width="100%" display="flex" justifyContent="flex-end" sx={{ marginBottom: "15px" }}>
-                <a href="/Profile.pdf" download style={{ textDecoration: 'none' }}>
-                    <DownloadButton>
-                        <Download style={{ marginRight: '4px' }} />
-                        Baixar CV
-                    </DownloadButton>
-                </a>
+              <a href="/Profile.pdf" download style={{ textDecoration: "none" }}>
+                <DownloadButton>
+                  <Download style={{ marginRight: "4px" }} />
+                  {downloadText}
+                </DownloadButton>
+              </a>
             </Box>
-
+  
             <Grid container spacing={3} alignItems="flex-start">
-                <Grid item xs={12} md={6}>
-                    <ResumeCard style={{ minHeight: '200px', overflowY: 'auto' }}>
-                        <Title>Sobre Mim</Title>
-                        <BodyText>
-                            Sou <strong>Frontend Developer</strong> e entusiasta de <strong>Networking & Cloud</strong>. Apaixonado por tecnologia e inovação,
-                            com experiência em desenvolvimento web e infraestrutura de redes. Atuo na configuração de equipamentos de rede
-                            e servidores Linux e Windows.
-                        </BodyText>
-                    </ResumeCard>
-                </Grid>
-
-                <Grid item xs={12} md={6}>
-                    <ResumeCard height="200px">
-                        <Title>Habilidades</Title>
-                        <ListItem dotColor="green">Desenvolvimento Frontend (React, TypeScript, JavaScript)</ListItem>
-                        <ListItem dotColor="green">Arquitetura de Redes</ListItem>
-                        <ListItem dotColor="green">Azure DevOps</ListItem>
-                        <ListItem dotColor="green">PostgreSQL</ListItem>
-                    </ResumeCard>
-                </Grid>
-
-                <Grid item xs={12} md={6}>
-                    <ResumeCard height="auto" style={{ minHeight: '290px', overflowY: 'auto' }}>
-                        <Title>Experiência</Title>
-                        <BodyText fontWeight="bold">Norus - Desenvolvimento Frontend e Redes (Junho de 2023 - Presente)</BodyText>
-                        <ListItem dotColor="orange">Desenvolvimento de interfaces modernas e manutenção de aplicações Frontend.</ListItem>
-                        <ListItem dotColor="orange">Configuração e manutenção de redes e servidores.</ListItem>
-                        <BodyText fontWeight="bold" style={{ marginTop: '10px' }}>
-                            Jomani | Corretora de Seguros - Auxiliar de TI (Ago 2020 - Mar 2023)
-                        </BodyText>
-                        <ListItem dotColor="orange">Suporte técnico, configuração e manutenção de infraestrutura de TI.</ListItem>
-                        <ListItem dotColor="orange">Apoio na administração de redes e segurança da informação.</ListItem>
-                        <ListItem dotColor="orange">Atendimento e resolução de chamados internos.</ListItem>
-                    </ResumeCard>
-                </Grid>
-
-                <Grid item xs={12} md={6}>
-                    <ResumeCard height="auto" style={{ minHeight: '290px', overflowY: 'auto' }}>
-                        <Title>Certificações</Title>
-                        <ListItem dotColor="purple">Arquitetura de Redes</ListItem>
-                        <ListItem dotColor="purple">Proxmox + Hyper-V Server</ListItem>
-                        <ListItem dotColor="purple">Desenvolvimento Web Compacto e Completo</ListItem>
-                        <ListItem dotColor="purple">Git: Básico ao Avançado</ListItem>
-                        <ListItem dotColor="purple">Fundamentos de Programação</ListItem>
-                    </ResumeCard>
-                </Grid>
-
-                <Grid item xs={12}>
-                    <ResumeCard height="auto">
-                        <Title>Formação Acadêmica</Title>
-                        <Grid container spacing={2}>
-                            <Grid item xs={12} md={6}>
-                                <BodyText fontWeight="bold">Análise e Desenvolvimento de Sistemas</BodyText>
-                                <BodyText variant="body2">
-                                    Universidade do Sul de Santa Catarina (2024 - 2025)
-                                </BodyText>
-                            </Grid>
-
-                            <Grid item xs={12} md={6}>
-                                <BodyText fontWeight="bold">Dev Full-Stack Jr</BodyText>
-                                <BodyText variant="body2">
-                                    SENAI/SC (Julho 2024 - Maio 2025)
-                                </BodyText>
-                            </Grid>
-
-                            <Grid item xs={12} md={6}>
-                                <BodyText fontWeight="bold">Gestão de Tecnologia da Informação</BodyText>
-                                <BodyText variant="body2">
-                                    Univates (2020 - 2022)
-                                </BodyText>
-                            </Grid>
-
-                            <Grid item xs={12} md={6}>
-                                <BodyText fontWeight="bold">Ensino Médio Completo</BodyText>
-                                <BodyText variant="body2">
-                                    IECEG (2017 - 2019)
-                                </BodyText>
-                            </Grid>
-                        </Grid>
-                    </ResumeCard>
-                </Grid>
+              {/* Sobre Mim */}
+              <Grid item xs={12} md={6}>
+                <ResumeCard style={{ minHeight: "200px", overflowY: "auto" }}>
+                  <Title>{aboutTitle}</Title>
+                  <BodyText>{aboutText}</BodyText>
+                </ResumeCard>
+              </Grid>
+  
+              {/* Habilidades */}
+              <Grid item xs={12} md={6}>
+                <ResumeCard height="200px">
+                  <Title>{skillsTitle}</Title>
+                  {skillsList.map((item, i) => (
+                    <ListItem dotColor="green" key={i}>{item}</ListItem>
+                  ))}
+                </ResumeCard>
+              </Grid>
+  
+              {/* Experiência */}
+              <Grid item xs={12} md={6}>
+                <ResumeCard style={{ minHeight: "290px", overflowY: "auto" }}>
+                  <Title>{experienceTitle}</Title>
+                  <BodyText fontWeight="bold">
+                    Norus - {lang === "pt" ? "Desenvolvimento Frontend e Redes" : "Frontend Development and Networking"} (Jun 2023 - Present)
+                  </BodyText>
+                  <ListItem dotColor="orange">
+                    {lang === "pt" ? "Desenvolvimento de interfaces modernas e manutenção de aplicações Frontend." :
+                      "Development of modern interfaces and maintenance of frontend applications."}
+                  </ListItem>
+                  <ListItem dotColor="orange">
+                    {lang === "pt" ? "Configuração e manutenção de redes e servidores." :
+                      "Network and server setup and maintenance."}
+                  </ListItem>
+  
+                  <BodyText fontWeight="bold" style={{ marginTop: "10px" }}>
+                    Jomani | Corretora de Seguros - {lang === "pt" ? "Auxiliar de TI" : "IT Assistant"} (Aug 2020 - Mar 2023)
+                  </BodyText>
+                  <ListItem dotColor="orange">
+                    {lang === "pt" ? "Suporte técnico, configuração e manutenção de infraestrutura de TI." :
+                      "Tech support, setup and maintenance of IT infrastructure."}
+                  </ListItem>
+                  <ListItem dotColor="orange">
+                    {lang === "pt" ? "Administração de redes e segurança da informação." :
+                      "Network administration and information security."}
+                  </ListItem>
+                  <ListItem dotColor="orange">
+                    {lang === "pt" ? "Atendimento e resolução de chamados internos." :
+                      "Handling and resolving internal support tickets."}
+                  </ListItem>
+                </ResumeCard>
+              </Grid>
+  
+              {/* Certificações */}
+              <Grid item xs={12} md={6}>
+                <ResumeCard style={{ minHeight: "290px", overflowY: "auto" }}>
+                  <Title>{certificationsTitle}</Title>
+                  <ListItem dotColor="purple">{lang === "pt" ? "Arquitetura de Redes" : "Network Architecture"}</ListItem>
+                  <ListItem dotColor="purple">{lang === "pt" ? "Proxmox + Hyper-V Server" : "Proxmox + Hyper-V Server"}</ListItem>
+                  <ListItem dotColor="purple">{lang === "pt" ? "Desenvolvimento Web Compacto e Completo" : "Complete Web Development"}</ListItem>
+                  <ListItem dotColor="purple">{lang === "pt" ? "Git: Básico ao Avançado" : "Git: Beginner to Advanced"}</ListItem>
+                  <ListItem dotColor="purple">{lang === "pt" ? "Fundamentos de Programação" : "Programming Fundamentals"}</ListItem>
+                </ResumeCard>
+              </Grid>
+  
+              {/* Formação Acadêmica */}
+              <Grid item xs={12}>
+                <ResumeCard height="auto">
+                  <Title>{educationTitle}</Title>
+                  <Grid container spacing={2}>
+                    <Grid item xs={12} md={6}>
+                      <BodyText fontWeight="bold">
+                        {lang === "pt" ? "Análise e Desenvolvimento de Sistemas" : "Systems Analysis and Development"}
+                      </BodyText>
+                      <BodyText variant="body2">Universidade do Sul de Santa Catarina (2024 - 2025)</BodyText>
+                    </Grid>
+  
+                    <Grid item xs={12} md={6}>
+                      <BodyText fontWeight="bold">Dev Full-Stack Jr</BodyText>
+                      <BodyText variant="body2">SENAI/SC (Jul 2024 - May 2025)</BodyText>
+                    </Grid>
+  
+                    <Grid item xs={12} md={6}>
+                      <BodyText fontWeight="bold">
+                        {lang === "pt" ? "Gestão de Tecnologia da Informação" : "IT Management"}
+                      </BodyText>
+                      <BodyText variant="body2">Univates (2020 - 2022)</BodyText>
+                    </Grid>
+  
+                    <Grid item xs={12} md={6}>
+                      <BodyText fontWeight="bold">
+                        {lang === "pt" ? "Ensino Médio Completo" : "High School Diploma"}
+                      </BodyText>
+                      <BodyText variant="body2">IECEG (2017 - 2019)</BodyText>
+                    </Grid>
+                  </Grid>
+                </ResumeCard>
+              </Grid>
             </Grid>
-        </ResumeContainer>
+          </motion.div>
+        </AnimatePresence>
+      </ResumeContainer>
     );
-}
+  }
