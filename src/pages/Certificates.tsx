@@ -2,7 +2,7 @@ import { Box, Typography, Paper, Grid } from "@mui/material";
 import { motion, AnimatePresence } from "framer-motion";
 import { useTheme } from "styled-components";
 import styled from 'styled-components';
-import { useLanguage } from "../contexts/LanguageContext";
+import { useLanguage } from "../contexts/useLanguage";
 import { FaCode, FaNetworkWired, FaGitAlt, FaServer, FaDocker } from "react-icons/fa";
 
 const StyledTitle = styled(Typography)`

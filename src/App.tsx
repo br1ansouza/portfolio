@@ -6,7 +6,7 @@ import { Home } from "./pages/Home";
 import { CertificatesPage } from "./pages/Certificates";
 import { Contact } from "./pages/Contact";
 import { ResumeSection } from "./pages/Resume";
-import Projects  from "./pages/Projects";
+import Projects from "./pages/Projects";
 import { Box } from "@mui/material";
 import { LanguageProvider } from "./contexts/LanguageContext";
 import { Sidebar } from "./components/Sidebar";
@@ -24,8 +24,7 @@ function App() {
       <GlobalStyle />
       <LanguageProvider>
         {loading ? (
-          <LoadingScreen />
-        ) : (
+          <LoadingScreen onLoaded={() => setLoading(false)} />) : (
           <Router>
             <Sidebar />
             <Box sx={{ marginLeft: "260px", padding: "2rem" }}>

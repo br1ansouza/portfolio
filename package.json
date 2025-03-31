@@ -3,11 +3,14 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "homepage": "https://br1ansouza.github.io/portifolio",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",
@@ -16,7 +19,7 @@
     "@mui/material": "^6.4.7",
     "@typescript-eslint/eslint-plugin": "^8.26.0",
     "@typescript-eslint/parser": "^8.26.0",
-    "framer-motion": "^12.4.10",
+    "framer-motion": "^12.6.2",
     "prettier": "^3.5.3",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
@@ -24,7 +27,7 @@
     "react-router-dom": "^7.3.0",
     "react-slick": "^0.30.3",
     "slick-carousel": "^1.8.1",
-    "styled-components": "^6.1.15"
+    "styled-components": "^6.1.16"
   },
   "devDependencies": {
     "@eslint/js": "^9.21.0",
@@ -37,6 +40,7 @@
     "eslint": "^9.21.0",
     "eslint-plugin-react-hooks": "^5.1.0",
     "eslint-plugin-react-refresh": "^0.4.19",
+    "gh-pages": "^6.3.0",
     "globals": "^15.15.0",
     "typescript": "~5.7.2",
     "typescript-eslint": "^8.24.1",

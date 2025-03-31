@@ -2,7 +2,7 @@ import { Box, List, ListItem, ListItemButton, ListItemText, IconButton } from "@
 import { useTheme } from "styled-components";
 import { BsSunFill, BsMoonFill, BsGithub, BsPersonFill, BsFolderFill, BsEnvelopeFill, BsHouseFill } from "react-icons/bs";
 import { FaAward } from "react-icons/fa";
-import { useLanguage } from "../contexts/LanguageContext";
+import { useLanguage } from "../contexts/useLanguage";
 import { motion, AnimatePresence } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { useThemeContext } from "../contexts/ThemeContext";

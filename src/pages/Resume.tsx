@@ -2,7 +2,7 @@ import { Box, Typography, Grid, Button } from '@mui/material';
 import { Download } from '@mui/icons-material';
 import styled from 'styled-components';
 import { motion, AnimatePresence } from "framer-motion";
-import { useLanguage } from "../contexts/LanguageContext";
+import { useLanguage } from "../contexts/useLanguage";
 
 const ResumeContainer = styled(Box)`
   position: relative;

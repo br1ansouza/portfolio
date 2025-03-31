@@ -2,7 +2,7 @@ import { Box, Typography } from "@mui/material";
 import { useTheme } from "styled-components";
 import { FaDiscord, FaLinkedin, FaEnvelope } from "react-icons/fa";
 import { motion, AnimatePresence } from "framer-motion";
-import { useLanguage } from "../contexts/LanguageContext";
+import { useLanguage } from "../contexts/useLanguage";
 
 export function Contact() {
   const theme = useTheme();

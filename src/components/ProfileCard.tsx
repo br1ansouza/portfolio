@@ -2,7 +2,7 @@ import { Box, Typography, Avatar, Grid, Paper, Tooltip } from "@mui/material";
 import { motion } from "framer-motion";
 import { useState } from "react";
 import { useTheme } from "styled-components";
-import { useLanguage } from "../contexts/LanguageContext";
+import { useLanguage } from "../contexts/useLanguage";
 import profileImage from "../assets/profile-images/profile-image.jpg";
 import { BsCodeSlash, BsDatabase, BsWrench } from "react-icons/bs";
 import { FaReact, FaBootstrap, FaGitAlt, FaDocker, FaNodeJs } from "react-icons/fa";

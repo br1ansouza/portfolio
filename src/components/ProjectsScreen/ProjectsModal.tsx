@@ -2,7 +2,7 @@ import { Box, Typography, Modal, Chip, Button } from '@mui/material';
 import styled from 'styled-components';
 import { useTheme } from 'styled-components';
 import { FaGithub } from "react-icons/fa";
-import { useLanguage } from "../../contexts/LanguageContext";
+import { useLanguage } from "../../contexts/useLanguage";
 
 type Lang = 'pt' | 'en';
 

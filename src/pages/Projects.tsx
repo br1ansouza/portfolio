@@ -3,7 +3,7 @@ import { Box, Typography, Grid, Chip } from '@mui/material';
 import { useTheme } from 'styled-components';
 import styled from 'styled-components';
 import { projects } from '../components/ProjectsScreen/ProjectsCard';
-import { useLanguage } from '../contexts/LanguageContext';
+import { useLanguage } from '../contexts/useLanguage';
 import ProjectModal from '../components/ProjectsScreen/ProjectsModal';
 import { motion, AnimatePresence } from 'framer-motion';
 
