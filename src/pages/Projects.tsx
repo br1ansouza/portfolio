@@ -30,21 +30,23 @@ const ProjectCard = styled(Box)`
   background-color: rgba(71, 68, 68, 0.45);
   border: 1px solid ${({ theme }) => theme.colors.border};
   box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
-  backdrop-filter: blur(8px);
 
   &:hover {
-    transform: scale(1.03);
     box-shadow: 1px 6px 20px rgba(0, 0, 0, 0.3);
   }
 
   &:hover .overlay {
     opacity: 1;
-    backdrop-filter: blur(8px);
   }
 
   &:hover .overlay-text {
     opacity: 1;
     transform: translateY(0);
+  }
+
+  &:hover .project-img::before {
+    backdrop-filter: blur(8px);
+    opacity: 1;
   }
 `;
 
@@ -56,6 +58,7 @@ const ProjectImage = styled(Box)`
   background-repeat: no-repeat;
   border-radius: 0;
   position: relative;
+  z-index: 0;
 
   &::before {
     content: "";
@@ -63,7 +66,9 @@ const ProjectImage = styled(Box)`
     inset: 0;
     background: rgba(0, 0, 0, 0.3);
     backdrop-filter: blur(0px);
+    opacity: 0;
     transition: backdrop-filter 0.3s ease-in-out, opacity 0.3s ease-in-out;
+    z-index: 0;
   }
 `;
 
@@ -71,12 +76,13 @@ const Overlay = styled(Box)`
   position: absolute;
   inset: 0;
   background: rgba(0, 0, 0, 0.4);
-  backdrop-filter: blur(0px);
+  backdrop-filter: none;
   display: flex;
   justify-content: center;
   align-items: center;
   opacity: 0;
-  transition: opacity 0.3s ease-in-out, backdrop-filter 0.3s ease-in-out;
+  transition: opacity 0.3s ease-in-out;
+  z-index: 2;
 `;
 
 const OverlayText = styled(Typography)`
@@ -86,6 +92,8 @@ const OverlayText = styled(Typography)`
   opacity: 0;
   transform: translateY(10px);
   transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+  z-index: 3;
+  position: relative;
 `;
 
 const TechChip = styled(Chip)`
@@ -177,7 +185,7 @@ export function Projects() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -20 }}
-          transition={{ duration: 0.4 }}
+          transition={{ duration: 0.2 }}
           style={{
             width: "100%",
             display: "flex",
@@ -198,10 +206,13 @@ export function Projects() {
                     whileHover={{ scale: 1.05 }}
                     initial={{ opacity: 0, y: 40 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, delay: index * 0.1, ease: "easeOut" }}
+                    transition={{ duration: 0.3, delay: index * 0.1, ease: "easeOut" }}
                   >
                     <ProjectCard onClick={() => handleOpen(project)}>
-                      <ProjectImage style={{ backgroundImage: `url(${project.coverImage})` }}>
+                      <ProjectImage
+                        className="project-img"
+                        style={{ backgroundImage: `url(${project.coverImage})` }}
+                      >
                         <Overlay className="overlay">
                           <OverlayText className="overlay-text">{viewDetails}</OverlayText>
                         </Overlay>
