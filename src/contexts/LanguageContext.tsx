@@ -7,7 +7,7 @@ interface LanguageProviderProps {
 
 export function LanguageProvider({ children }: LanguageProviderProps) {
   const [language, setLanguage] = useState(() => {
-    return localStorage.getItem("language") || "pt";
+    return localStorage.getItem("language") || "en";
   });
 
   useEffect(() => {

@@ -17,8 +17,14 @@ export function ProfileCard() {
   const aboutTitle = language === "pt" ? "Sobre Mim" : "About Me";
   const aboutText =
     language === "pt"
-      ? `Desenvolvedor Front End com experiência em redes, infraestrutura e desenvolvimento de aplicações web e mobile. Trabalho com React, TypeScript, React Native no Front-end e Node.js, Express, TypeORM no Back-end, utilizando bancos de dados PostgreSQL e MariaDB. Tenho experiência com autenticação JWT, segurança e ferramentas como Git, Docker, Postman e Swagger.`
-      : `Front End Developer with experience in networking, infrastructure, and web and mobile application development. I work with React, TypeScript, React Native on the Front-end and Node.js, Express, TypeORM on the Back-end, using PostgreSQL and MariaDB databases. I have experience with JWT authentication, security, and tools like Git, Docker, Postman, and Swagger.`;
+      ? `Oi! Eu sou um entusiasta de tecnologia que decidiu transformar café em código. Trabalho com desenvolvimento Front-end (e às vezes dou uma espiada no Back-end também).
+Gosto de resolver problemas, criar interfaces bacanas e mexer com ferramentas que facilitam a vida de quem usa e de quem desenvolve.
+Atualmente tô mergulhado no universo React, TypeScript, Node.js e mais umas tecnologias que têm nomes esquisitos mas fazem mágica quando bem usadas.
+Se você curte tecnologia, design, ou só quer trocar uma ideia sobre o caos que é o desenvolvimento web... seja bem-vindo(a)!`
+      : `Hey there! I’m a tech enthusiast who turned caffeine into code (and questionable sleep habits). I work mostly with Front-end development, but I like to sneak into the Back-end when curiosity kicks in.
+I enjoy solving problems, building cool interfaces, and playing with tools that make life easier for users—and slightly less chaotic for developers.
+These days I'm deep into the React, TypeScript, and Node.js ecosystem, with a sprinkle of other magical-sounding tech.
+If you're into tech, design, or just want to rant about the rollercoaster that is web development... you're in the right place.`;
 
   const categories = [
     {
@@ -119,7 +125,7 @@ export function ProfileCard() {
               mb={2}
               sx={{
                 fontSize: "3rem",
-                marginTop: "4rem !important",
+                marginTop: "1.5rem !important",
                 fontFamily: "'Poppins', sans-serif",
                 background: "linear-gradient(90deg, #ff0080, #00bfff, #ff0080)",
                 backgroundSize: "200% auto",
@@ -136,9 +142,17 @@ export function ProfileCard() {
               {aboutTitle}
             </Typography>
 
-            <Typography variant="body1" sx={{ color: theme.colors.textSecondary, lineHeight: "1.8", fontSize: "1.1rem" }}>
-              {aboutText}
-            </Typography>
+            <Box sx={{ display: 'flex', flexDirection: 'column', gap: '1rem', mt: 1 }}>
+              {aboutText.split('\n').map((paragraph, index) => (
+                <Typography
+                  key={index}
+                  variant="body1"
+                  sx={{ color: theme.colors.textSecondary, lineHeight: "1.1", fontSize: "1.1rem" }}
+                >
+                  {paragraph}
+                </Typography>
+              ))}
+            </Box>
 
             <Grid container spacing={2} justifyContent="flex-start" sx={{ mt: 3 }}>
               {categories.map((category, index) => (
@@ -196,7 +210,7 @@ export function ProfileCard() {
             </Grid>
           </Box>
         </Box>
-        </motion.div>
-        </AnimatePresence>
-        );
+      </motion.div>
+    </AnimatePresence>
+  );
 }

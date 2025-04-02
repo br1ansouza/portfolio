@@ -128,7 +128,7 @@ export function CertificatesPage() {
               {certificates.map((cert, index) => (
                 <Grid item xs={12} sm={6} md={4} key={index}>
                   <motion.div
-                    whileHover={{ scale: 1.05, rotate: 1 }}
+                    whileHover={{ scale: 1.05 }}
                     initial={{ opacity: 0, y: 40 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6, delay: index * 0.1, ease: "easeOut" }}

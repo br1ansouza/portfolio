@@ -126,12 +126,8 @@ export function ResumeSection() {
   
     const aboutTitle = lang === "pt" ? "Sobre Mim" : "About Me";
     const aboutText = lang === "pt"
-      ? `Sou Frontend Developer e entusiasta de Networking & Cloud. Apaixonado por tecnologia e inovação,
-         com experiência em desenvolvimento web e infraestrutura de redes. Atuo na configuração de equipamentos de rede
-         e servidores Linux e Windows.`
-      : `I am a Frontend Developer and Networking & Cloud enthusiast. Passionate about technology and innovation,
-         with experience in web development and network infrastructure. I work with configuring network devices
-         and Linux and Windows servers.`;
+    ? `Desenvolvedor Front End com experiência em redes, infraestrutura e desenvolvimento de aplicações web e mobile. Trabalho com React, TypeScript, React Native no Front-end e Node.js, Express, TypeORM no Back-end, utilizando bancos de dados PostgreSQL e MariaDB. Tenho experiência com autenticação JWT, segurança e ferramentas como Git, Docker, Postman e Swagger.`
+    : `Front End Developer with experience in networking, infrastructure, and web and mobile application development. I work with React, TypeScript, React Native on the Front-end and Node.js, Express, TypeORM on the Back-end, using PostgreSQL and MariaDB databases. I have experience with JWT authentication, security, and tools like Git, Docker, Postman, and Swagger.`;
   
     const skillsTitle = lang === "pt" ? "Habilidades" : "Skills";
     const skillsList = lang === "pt"
