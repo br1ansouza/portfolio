@@ -17,6 +17,12 @@ import logo_rpg from "../assets/projects-images/app-rpg/logo-rpg.png";
 
 import logo_api_gestao from "../assets/projects-images/api-gestao-filiais-produtos/logo-api-gestao.png";
 
+import tela_login_appbank from "../assets/projects-images/app-bank/tela-login.png";
+import tela_home_appbank from "../assets/projects-images/app-bank/tela-home.png";
+import tela_dashboard from "../assets/projects-images/app-bank/tela-dashboard.png";
+import tela_criacao_conta from "../assets/projects-images/app-bank/tela-criacao-conta.png";
+import tela_logo_appbank from "../assets/projects-images/app-bank/tela-logo.png";
+
 export const farmacia = {
   tela_home,
   tela_movimentacoes,
@@ -44,4 +50,12 @@ export const rpg = {
 
 export const api_gestao = {
   logo_api_gestao,
+};
+
+export const appbank = {
+  tela_login_appbank,
+  tela_home_appbank,
+  tela_dashboard,
+  tela_criacao_conta,
+  tela_logo_appbank,
 };

@@ -1,6 +1,54 @@
-import { farmacia, webcarros, ecommerce, api_gestao, rpg } from "../../data/images";
+import { farmacia, webcarros, ecommerce, api_gestao, rpg, appbank } from "../../data/images";
 
 export const projects = [
+  {
+    title: {
+      pt: "App Bank",
+      en: "App Bank",
+    },
+    description: {
+      pt: "Aplicativo bancário mobile com autenticação, exibição de saldo, transações recentes, gráfico de gastos e cartão virtual.",
+      en: "Mobile banking app with authentication, balance display, recent transactions, spending chart, and virtual card.",
+    },
+    fullDescription: {
+      pt: "O App Bank é um aplicativo mobile desenvolvido em React Native com TypeScript, focado em exibir informações financeiras de forma clara, bonita e funcional. O app realiza autenticação segura com JWT, busca os dados do usuário logado e exibe informações como saldo, transações recentes e um cartão virtual estilizado. O projeto está estruturado em componentes reutilizáveis, otimizando a manutenção do código.",
+      en: "App Bank is a mobile application built with React Native and TypeScript, designed to display financial information in a clear, stylish, and functional way. It performs secure authentication using JWT, retrieves the logged user's data, and displays information such as balance, recent transactions, and a styled virtual card. The project is structured using reusable components, ensuring maintainability.",
+    },
+    technologies: [
+      "React Native",
+      "TypeScript",
+      "Expo",
+      "JWT",
+      "Node.js (API)"
+    ],
+    coverImage: appbank.tela_logo_appbank,
+    images: [
+      appbank.tela_dashboard,
+      appbank.tela_home_appbank,
+      appbank.tela_criacao_conta,
+    ],
+    keyFeatures: {
+      pt: [
+        "Autenticação JWT",
+        "Exibição de saldo com animação",
+        "Gráfico de gastos (PieChart)",
+        "Visão geral do saldo (LineChart)",
+        "Cartão virtual dinâmico",
+        "Logout com remoção do token",
+        "Estilização responsiva e moderna"
+      ],
+      en: [
+        "JWT Authentication",
+        "Animated balance display",
+        "Spending chart (PieChart)",
+        "Balance overview (LineChart)",
+        "Dynamic virtual card",
+        "Logout with token removal",
+        "Responsive and modern styling"
+      ]
+    },
+    githubUrl: "https://github.com/br1ansouza/App-Bank",
+  },
   {
     title: {
       pt: "API de Gestão de Filiais e Produtos",
