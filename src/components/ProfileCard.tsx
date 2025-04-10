@@ -176,15 +176,18 @@ If you're into tech, design, or just want to rant about the rollercoaster that i
                     }}
                   >
                     <motion.div
-                      initial={{ scale: 1, opacity: 0.6 }}
-                      animate={{ scale: [1, 1.3, 1], opacity: [0.6, 1, 0.6] }}
-                      transition={{ duration: 1.5, delay: 0.2 * index }}
+                      animate={{ opacity: [1, 0.7, 1] }}
+                      transition={{
+                        duration: 3,
+                        repeat: Infinity,
+                        repeatType: "loop",
+                        ease: "easeInOut",
+                      }}
                       whileHover={{ scale: 1.2, filter: "brightness(1.5)" }}
                       style={{ fontSize: "2rem", color: category.color }}
                     >
                       {category.icon}
                     </motion.div>
-
 
                     <Typography variant="h6" fontWeight="bold" sx={{ color: theme.colors.textPrimary }}>
                       {category.title}
