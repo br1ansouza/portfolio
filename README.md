@@ -1,1 +1,1 @@
-https://portifolio-br1an.netlify.app/
+https://portfolio-br1an.netlify.app/
