@@ -23,6 +23,14 @@ import tela_dashboard from "../assets/projects-images/app-bank/tela-dashboard.pn
 import tela_criacao_conta from "../assets/projects-images/app-bank/tela-criacao-conta.png";
 import tela_logo_appbank from "../assets/projects-images/app-bank/tela-logo.png";
 
+import sidebar_background_dark from "../assets/sidebar/sidebar-background.png";
+import sidebar_background_light from "../assets/sidebar/sidebar-background-light.png";
+
+export const sidebarBackground = {
+  dark: sidebar_background_dark,
+  light: sidebar_background_light,
+};
+
 export const farmacia = {
   tela_home,
   tela_movimentacoes,

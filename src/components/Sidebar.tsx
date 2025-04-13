@@ -8,6 +8,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { useThemeContext } from "../contexts/ThemeContext";
 import { useState } from "react";
+import { sidebarBackground } from "../data/images";
 
 export function Sidebar() {
   const theme = useTheme();
@@ -25,8 +26,8 @@ export function Sidebar() {
   ];
 
   const darkBackgroundPath = darkMode
-    ? '/src/assets/sidebar/sidebar-background.png'
-    : '/src/assets/sidebar/sidebar-background-light.png';
+  ? sidebarBackground.dark
+  : sidebarBackground.light;
 
   const sidebarVariants = {
     expanded: {
