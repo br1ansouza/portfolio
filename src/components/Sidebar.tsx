@@ -30,6 +30,11 @@ export function Sidebar() {
         top: 0,
         left: 0,
         backgroundColor: theme.colors.sidebarBackground,
+        backgroundImage: `url('/src/assets/sidebar/sidebar-background.png')`,
+        backgroundSize: "cover",
+        backgroundRepeat: "no-repeat",
+        backgroundPosition: "center",
+        backgroundBlendMode: "overlay",
         backdropFilter: "blur(8px)",
         padding: "2rem 1.2rem",
         display: "flex",
@@ -121,10 +126,7 @@ export function Sidebar() {
         </Box>
 
         <Box sx={{ display: "flex", gap: "1rem", justifyContent: "center" }}>
-          <motion.div
-            whileTap={{ rotate: 360 }}
-            transition={{ duration: 0.6, ease: "easeInOut" }}
-          >
+          <motion.div whileTap={{ rotate: 360 }} transition={{ duration: 0.6, ease: "easeInOut" }}>
             <IconButton
               onClick={toggleTheme}
               sx={{
@@ -141,7 +143,6 @@ export function Sidebar() {
               {darkMode ? <BsSunFill size={24} /> : <BsMoonFill size={24} />}
             </IconButton>
           </motion.div>
-
 
           <IconButton
             onClick={() => setLanguage(language === "pt" ? "en" : "pt")}
