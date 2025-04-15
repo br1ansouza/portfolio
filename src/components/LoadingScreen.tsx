@@ -126,7 +126,7 @@ const Container = styled(motion.div)`
   justify-content: center;
   height: 100vh;
   width: 100%;
-  background: linear-gradient(135deg,rgb(23, 19, 26) 0%,rgb(40, 30, 40) 100%);
+  background: linear-gradient(135deg,rgb(23, 19, 26) 0%,rgb(37, 30, 40) 100%);
   color: #ffffff;
   position: relative;
   overflow: hidden;
