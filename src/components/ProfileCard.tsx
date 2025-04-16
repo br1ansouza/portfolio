@@ -69,7 +69,7 @@ const categories = [
     ],
   },
   {
-    title: language === "pt" ? "]Banco de Dados" : "Database",
+    title: language === "pt" ? "Banco de Dados" : "Database",
     icon: <BsDatabase size={28} />,
     color: "#8E2DE2",
     techIcons: [
