@@ -8,7 +8,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { useThemeContext } from "../contexts/ThemeContext";
 import { useState } from "react";
-import { sidebarBackground } from "../data/images";
 
 export function Sidebar() {
   const theme = useTheme();
@@ -24,10 +23,6 @@ export function Sidebar() {
     { section: "resume", pt: "Resumo", en: "Resume", icon: BsPersonFill, route: "/resume" },
     { section: "contact", pt: "Contato", en: "Contact", icon: BsEnvelopeFill, route: "/contact" },
   ];
-
-  const darkBackgroundPath = darkMode
-  ? sidebarBackground.dark
-  : sidebarBackground.light;
 
   const sidebarVariants = {
     expanded: {
@@ -157,10 +152,6 @@ export function Sidebar() {
         top: 0,
         left: 0,
         backgroundColor: theme.colors.sidebarBackground,
-        backgroundImage: `url(${darkBackgroundPath})`,
-        backgroundSize: "cover",
-        backgroundRepeat: "no-repeat",
-        backgroundPosition: "center",
         backgroundBlendMode: "overlay",
         backdropFilter: "blur(8px)",
         padding: "2rem 1.2rem",
@@ -197,7 +188,7 @@ export function Sidebar() {
       </motion.div>
 
       <Box>
-        <List sx={{ display: "flex", flexDirection: "column", gap: "12px" }}>
+        <List sx={{ display: "flex", flexDirection: "column", gap: "18px" }}>
           {menuItems.map((item, index) => (
             <ListItem key={index} disablePadding>
               <Tooltip title={isCollapsed ? (language === "pt" ? item.pt : item.en) : ""} placement="right">
@@ -217,7 +208,7 @@ export function Sidebar() {
                     sx={{
                       display: "flex",
                       alignItems: "center",
-                      gap: "14px",
+                      gap: "16px",
                       padding: isCollapsed ? "1rem 0.5rem" : "1rem",
                       borderRadius: "10px",
                       color: theme.colors.hover,
